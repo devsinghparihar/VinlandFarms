@@ -1,0 +1,23 @@
+Ports
+FarmerService -> 5001 /
+DealerService -> 5002
+AdminService  -> 5003
+EmailService  -> 5004
+TransactionService ->5005
+FarmLand Registry ->8761
+key -> wtumtiygdvvqlkgw
+
+Remaining requirements->
+Logger
+Junit
+Stream
+Optionals
+Throwing exceptions 
+circuit breaker
+Exception response JSON
+fallback
+
+functionality
+Delete 
+Subscribe crop 
+generate report

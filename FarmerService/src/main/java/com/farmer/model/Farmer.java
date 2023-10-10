@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection="Farmers")
-
 public class Farmer {
 	
 	@MongoId

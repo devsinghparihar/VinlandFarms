@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.farmer.model.Farmer;
 import java.util.List;
+import com.farmer.model.Crop;
+
 
 
 @Repository
