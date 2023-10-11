@@ -41,6 +41,10 @@ public class AdminController {
         Admin updatedAdmin = adminService.updateAdmin(admin, id);
         return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
     }
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity<Admin> findByEmail(@PathVariable String email){
+    	return new ResponseEntity<Admin>(adminService.findAdminByEmail(email), HttpStatus.OK); 
+    }
 
     @GetMapping("/activeFarmers")
     public ResponseEntity<List<Farmer>> getActiveFarmers() {

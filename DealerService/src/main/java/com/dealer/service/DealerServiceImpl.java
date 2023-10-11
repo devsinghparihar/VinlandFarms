@@ -1,5 +1,6 @@
 package com.dealer.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.dealer.clients.EmailClient;
 import com.dealer.clients.FarmerClient;
 import com.dealer.clients.TransactionClient;
+import com.dealer.dtos.CropDetailDTO;
 import com.dealer.dtos.EmailModel;
 import com.dealer.dtos.TransactionDTO;
 import com.dealer.dtos.UpdateDetailDTO;
@@ -166,11 +168,36 @@ public class DealerServiceImpl implements DealerService {
 	public boolean runScan(String dealerId) {
 		Dealer dealer = dr.findById(dealerId).get();
 		List<String> required = dealer.getRequirements();
+		List<String> availableCrops = new ArrayList<>();
 		for(String cropType: required) {
+			List<CropDetailDTO> crop=  farmerClient.getCropsByType(cropType);
 			
+			for(CropDetailDTO cropsInDto: crop) {
+				availableCrops.add(cropsInDto.getCropType());
+			}
+			if(availableCrops.contains(cropType)) {
+				return true;
+			}
 		}
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<String> findRequirements(String dealerId) {
+		Dealer dealer = dr.findById(dealerId).get();
+		List<String> required = dealer.getRequirements();
+		List<String> availableCrops = new ArrayList<>();
+		for(String cropType: required) {
+			List<CropDetailDTO> crop=  farmerClient.getCropsByType(cropType);
+			
+			for(CropDetailDTO cropsInDto: crop) {
+				availableCrops.add(cropsInDto.getCropType());
+			}
+			
+		}
+		// TODO Auto-generated method stub
+		return availableCrops;
 	}
 
 	

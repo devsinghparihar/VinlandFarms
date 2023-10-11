@@ -68,11 +68,11 @@ public class DealerController {
 	
 	
 	@GetMapping("/findDealerById/{Id}")
-	public ResponseEntity<Dealer> findFarmerById(@PathVariable String Id){
+	public ResponseEntity<Dealer> findDealerById(@PathVariable String Id){
 		return new ResponseEntity<Dealer>(dealerService.findDealerById(Id),HttpStatus.OK);
 	}
 	@GetMapping("/findDealerByEmail/{email}")
-	public ResponseEntity<Dealer> findFarmerByEmail(@PathVariable String email){
+	public ResponseEntity<Dealer> findDealerByEmail(@PathVariable String email){
 		return new ResponseEntity<Dealer>(dealerService.findDealerByEmail(email),HttpStatus.OK);
 	}
 	
@@ -85,6 +85,10 @@ public class DealerController {
 	@GetMapping("/dealerTransactionHistory/{id}")
 	public ResponseEntity<List<Transaction>> getDealerHistory(@PathVariable String id){
 		return new ResponseEntity<List<Transaction>>(dealerService.findTransactionsByDealerId(id),HttpStatus.OK);
+	}
+	@GetMapping("/findRequirements/{id}")
+	public ResponseEntity<List<String>> findRequirements(@PathVariable String id){
+		return new ResponseEntity<List<String>>(dealerService.findRequirements(id),HttpStatus.OK);
 	}
 	
 	

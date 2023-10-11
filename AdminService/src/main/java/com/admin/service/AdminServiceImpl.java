@@ -122,4 +122,10 @@ public class AdminServiceImpl implements AdminService {
 		return ratings;
 	}
 
+	@Override
+	public Admin findAdminByEmail(String email) {
+		// TODO Auto-generated method stub
+		return ar.findByEmail(email).get();
+	}
+
 }

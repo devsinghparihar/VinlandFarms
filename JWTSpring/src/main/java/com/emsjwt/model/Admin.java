@@ -1,4 +1,4 @@
-package com.admin.model;
+package com.emsjwt.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "admin")
+
 public class Admin {
 	@MongoId
 	private String adminId;

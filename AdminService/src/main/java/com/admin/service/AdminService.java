@@ -15,6 +15,7 @@ public interface AdminService {
 	
 	Admin addAdmin(Admin admin);
 	Admin updateAdmin(Admin admin, String id);
+	Admin findAdminByEmail(String email);
 	List<Farmer> getActiveFarmers();
 	List<Farmer> getInactiveFarmers();
 	List<Dealer> getActiveDealers();

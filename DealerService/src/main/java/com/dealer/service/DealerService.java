@@ -19,6 +19,7 @@ public interface DealerService {
 	Transaction buyCrop(String farmerId,String dealerId, String cropType, int quantity);
 	List<Transaction> findTransactionsByDealerId(String id);
 	boolean runScan(String dealerId);
+	List<String> findRequirements(String dealerId);
 	
 
 }
