@@ -1,0 +1,84 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AdminServiceApplication<AdminService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.admin.AdminServiceApplication",
+            "projectName": "AdminService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DealerServiceApplication<DealerService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.dealer.DealerServiceApplication",
+            "projectName": "DealerService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EmailServiceApplication<EmailService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.email.EmailServiceApplication",
+            "projectName": "EmailService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-FarmerServiceApplication<FarmerService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.farmer.FarmerServiceApplication",
+            "projectName": "FarmerService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-FarmLandRegistryApplication<FarmLandRegistry>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.registry.FarmLandRegistryApplication",
+            "projectName": "FarmLandRegistry",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-JwtSpringApplication<JWTSpring>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.emsjwt.JwtSpringApplication",
+            "projectName": "JWTSpring",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TransactionServiceApplication<TransactionService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.transactions.TransactionServiceApplication",
+            "projectName": "TransactionService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-VinlandFarmsGatewayApplication<VinlandFarmsGateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.vinlandFarmsGateway.VinlandFarmsGatewayApplication",
+            "projectName": "VinlandFarmsGateway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
