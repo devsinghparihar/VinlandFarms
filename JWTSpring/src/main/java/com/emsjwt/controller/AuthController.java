@@ -39,7 +39,7 @@ import jakarta.validation.Valid;
 
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/public")
 public class AuthController {
