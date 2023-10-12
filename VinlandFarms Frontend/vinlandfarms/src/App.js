@@ -11,6 +11,9 @@ import DealerDashboard from './Components/DashBoard/DealerDashboard';
 import FarmerRegistration from './Components/register/FarmerRegister';
 import DealerRegistration from './Components/register/DealerRegister';
 import AdminRegistration from './Components/register/AdminRegister';
+import AddCropForm from './Components/FarmerComponents/AddCropForm';
+import UpdateFarmerDetails from './Components/FarmerComponents/UpdateFarmerDetails';
+import BuyCrops from './Components/DealerComponents/BuyCrops';
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
           <Route path="/farmer-registration" component={FarmerRegistration} />
           <Route path="/dealer-registration" component={DealerRegistration} />
           <Route path="/admin-registration" component={AdminRegistration} />
+          <Route path="/updateFarmerDetails" component={UpdateFarmerDetails} />
+          <Route path="/buyCrop" component={BuyCrops} />
+          <Route path="/addCrop" component={AddCropForm} />
           <Route path="/login" component={LoginForm} />
         </Switch>
       </div>

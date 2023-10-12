@@ -1,0 +1,117 @@
+/* Container for BuyCrops component */
+.buy-crops-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  
+  /* Container for BuyCrops content and sidebar */
+  .buy-crops-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  /* Crop list container */
+  .crop-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  /* Individual crop card */
+  .crop-card {
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    width: 300px;
+    transition: transform 0.2s ease; /* Add a smooth hover effect */
+    cursor: pointer;
+  }
+  
+  .crop-card:hover {
+    transform: scale(1.05); /* Enlarge the card on hover */
+  }
+  
+  /* Crop image */
+  .crop-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  .crop-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Crop details */
+  .crop-details {
+    padding: 10px;
+  }
+  
+  /* Select Quantity input field */
+  .crop-details input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* "Select Crop" button */
+  .crop-details button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Add a smooth hover effect */
+  }
+  
+  .crop-details button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Sidebar container */
+  .sidebar {
+    width: 55em; /* Increase the width */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Increase border radius for rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a stronger shadow for depth */
+    background-color: #f0f0f0; /* Change the background color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top; /* Center content vertically */
+  
+    /* Style for the dummy text */
+    color: #888;
+    text-align: center;
+  }
+  
+  /* Style the "Buy Now" button */
+  .sidebar button {
+    margin-top: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Add a smooth hover effect */
+  }
+  
+  .sidebar button:hover {
+    background-color: #0056b3;
+  }
+  
