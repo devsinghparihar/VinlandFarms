@@ -1,0 +1,86 @@
+/* TransactionList.css */
+
+.transaction-list {
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .transaction-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }/* TransactionList.css */
+
+.transaction-list {
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .transaction-card {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .transaction-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .transaction-info {
+    font-size: 16px;
+  }
+  
+  .transaction-info p {
+    margin: 8px 0;
+  }
+  
+  .transaction-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: white; /* Change text color to white for better contrast */
+    background-color: #FF79C6; /* Light blue background */
+    padding: 5px; /* Add padding for better spacing */
+    margin-bottom: 10px;
+    border-radius: 20px;
+    width: 10em;
+  }
+  
+  
+  .transaction-card {
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .transaction-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .transaction-info {
+    font-size: 16px;
+  }
+  
+  .transaction-info p {
+    margin: 8px 0;
+  }
+  
+  /* Add any other styles or modifications as needed */
+  

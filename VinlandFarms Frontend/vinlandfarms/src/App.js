@@ -14,6 +14,14 @@ import AdminRegistration from './Components/register/AdminRegister';
 import AddCropForm from './Components/FarmerComponents/AddCropForm';
 import UpdateFarmerDetails from './Components/FarmerComponents/UpdateFarmerDetails';
 import BuyCrops from './Components/DealerComponents/BuyCrops';
+import InActiveFarmersList from './Components/AdminComponents/ViewInactiveFarmers';
+import TransactionList from './Components/AdminComponents/TransactionList';
+import DealerTransactionList from './Components/DealerComponents/TransactionList';
+import FarmerTransactionList from './Components/FarmerComponents/TransactionList';
+import ProfileDetails from './Components/FarmerComponents/ProfileDetails';
+import DealerProfile from './Components/DealerComponents/DealerProfile';
+import FarmerPanel from './Components/AdminComponents/FarmerPanel';
+import UpdateFarmer from './Components/AdminComponents/UpdateFarmer';
 
 function App() {
   return (
@@ -27,9 +35,18 @@ function App() {
           <Route path="/farmer-registration" component={FarmerRegistration} />
           <Route path="/dealer-registration" component={DealerRegistration} />
           <Route path="/admin-registration" component={AdminRegistration} />
-          <Route path="/updateFarmerDetails" component={UpdateFarmerDetails} />
+          {/* <Route path="/updateFarmerDetails" component={UpdateFarmerDetails} /> */}
           <Route path="/buyCrop" component={BuyCrops} />
           <Route path="/addCrop" component={AddCropForm} />
+          <Route path="/inActiveFarmers" component={InActiveFarmersList} />
+          <Route path="/allTransactions" component={TransactionList} />
+          <Route path="/dealerTransactions" component={DealerTransactionList} />
+          <Route path="/farmerTransactions" component={FarmerTransactionList} />
+          <Route path="/farmerProfile" component={ProfileDetails} />
+          <Route path="/dealerProfile" component={DealerProfile} />
+          <Route path="/farmerPanel" component={FarmerPanel} />
+          <Route path='/updateFarmerDetails/:farmerId/:email' component={UpdateFarmer}></Route> 
+          
           <Route path="/login" component={LoginForm} />
         </Switch>
       </div>

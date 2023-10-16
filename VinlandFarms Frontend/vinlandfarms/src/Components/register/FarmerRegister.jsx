@@ -28,16 +28,16 @@ function FarmerRegistration() {
     };
 
     try {
-        // Send formData to the API for farmer registration
+        
         
         const response = await axios.post('http://localhost:5006/public/registerFarmer', formData);
   
-        // Handle the response as needed, e.g., show a success message or redirect to a login page
+       
         console.log('Registration successful:', response.data);
         alert("Registration succcessfull... Check your email for confirmation\nRedirecting to login page");
         history.push('/login');
       } catch (error) {
-        // Handle registration error, e.g., display an error message or handle server-side validation errors
+        
         console.error('Registration failed:', error);
       }
     };

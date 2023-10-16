@@ -128,4 +128,16 @@ public class AdminServiceImpl implements AdminService {
 		return ar.findByEmail(email).get();
 	}
 
+	@Override
+	public Farmer deleteFarmerById(String id) {
+		// TODO Auto-generated method stub
+		return farmerClient.deleteFarmerById(id);
+	}
+
+	@Override
+	public List<Transaction> getAllTransaction() {
+		// TODO Auto-generated method stub
+		return transactionClient.getAllTransactions();
+	}
+
 }

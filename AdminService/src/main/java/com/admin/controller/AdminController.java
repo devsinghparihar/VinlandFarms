@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +21,12 @@ import com.admin.dtos.FarmerUpdateDTO;
 import com.admin.model.Admin;
 import com.admin.model.Dealer;
 import com.admin.model.Farmer;
+import com.admin.model.Transaction;
 import com.admin.service.AdminService;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 
 	@Autowired
@@ -87,5 +91,15 @@ public class AdminController {
         List<FarmerRatingDTO> farmersRatings = adminService.getFarmersRatings();
         return new ResponseEntity<>(farmersRatings, HttpStatus.OK);
     }
+    
+    @DeleteMapping("/deleteFarmerById/{id}")
+	public ResponseEntity<Farmer> deleteFarmerById(@PathVariable String id){
+		return new ResponseEntity<Farmer>(adminService.deleteFarmerById(id),HttpStatus.OK);
+	}
+    @GetMapping("/getAllTransactions")
+    public ResponseEntity<List<Transaction>> getAllTransaction(){
+    	return new ResponseEntity<>(adminService.getAllTransaction(),HttpStatus.OK);
+    }
+    	
 }
 

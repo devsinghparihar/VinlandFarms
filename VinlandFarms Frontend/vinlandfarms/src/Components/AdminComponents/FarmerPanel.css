@@ -1,0 +1,124 @@
+/* FarmerPanel.css */
+
+/* Entire container styling */
+.admin-panel {
+    display: flex;
+    padding: 20px;
+}
+
+/* Left section styling */
+.left-section {
+    flex: 1;
+    padding: 20px;
+    overflow: auto;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Right section styling */
+.right-section {
+    flex: 0.3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-left: 20px;
+}
+
+/* Table styling */
+.farmer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.farmer-table, .farmer-table th, .farmer-table td {
+    border: 1px solid #ddd;
+}
+
+.farmer-table th, .farmer-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.farmer-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.farmer-table th {
+    background-color:#44475A;
+    color: white;
+}
+
+.farmer-table td.rating {
+    font-size: 16px;
+    color: #ffac05;
+}
+
+.farmer-table tr:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.farmer-table td.show-more {
+    cursor: pointer;
+    color: #4CAF50;
+}
+
+/* Button styling */
+.action-button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.update-button {
+    background-color: #3CB371; /* Green */
+    color: white;
+    margin-right: 10px;
+}
+
+.delete-button {
+    background-color: #E74C3C; /* Red */
+    color: white;
+}
+
+/* Right section action cards */
+.action-card {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-card.active {
+    background-color: #E2E2E2;
+}
+
+.action-card h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.action-card p {
+    font-size: 14px;
+    color: #777;
+}
+.statusImage{
+    height: 10em;
+    width: 11em;
+}
+#updateBtn{
+    margin-right: 5px;
+}

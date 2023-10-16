@@ -68,7 +68,7 @@ public class AuthController {
 		
 		Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
 		List<String> li=authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-		JSONResponse res = new JSONResponse(token, user.getUsername(), li);		
+		JSONResponse res = new JSONResponse(token, user.getUsername(), li,user.getId());		
 		return ResponseEntity.ok(res);
 						
 													

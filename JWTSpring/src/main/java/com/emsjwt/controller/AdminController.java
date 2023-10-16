@@ -3,10 +3,12 @@ package com.emsjwt.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +23,7 @@ import com.emsjwt.dtos.FarmerUpdateDTO;
 import com.emsjwt.model.Admin;
 import com.emsjwt.model.Dealer;
 import com.emsjwt.model.Farmer;
+import com.emsjwt.model.Transaction;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -75,16 +78,15 @@ public class AdminController {
 
     @PutMapping("/updateFarmer/{email}")
     public ResponseEntity<FarmerUpdateDTO> updateFarmer(@RequestBody FarmerUpdateDTO farmerUpdateDTO, @PathVariable String email) {
-    	String password = encoder.encode(farmerUpdateDTO.getPassword());
-    	farmerUpdateDTO.setPassword(password);
+//    	 
         FarmerUpdateDTO updatedFarmer = adminClient.updateFarmer(farmerUpdateDTO, email);
         return ResponseEntity.ok(updatedFarmer);
     }
 
     @PutMapping("/updateDealer/{email}")
     public ResponseEntity<DealerUpdateDTO> updateDealer(@RequestBody DealerUpdateDTO dealerUpdateDTO, @PathVariable String email) {
-    	String password = encoder.encode(dealerUpdateDTO.getPassword());
-    	dealerUpdateDTO.setPassword(password);
+//    	String password = encoder.encode(dealerUpdateDTO.getPassword());
+//    	dealerUpdateDTO.setPassword(password);
         DealerUpdateDTO updatedDealer = adminClient.updateDealer(dealerUpdateDTO, email);
         return ResponseEntity.ok(updatedDealer);
     }
@@ -93,5 +95,14 @@ public class AdminController {
     public ResponseEntity<List<FarmerRatingDTO>> getFarmersRatings() {
         List<FarmerRatingDTO> farmersRatings = adminClient.getFarmersRatings();
         return ResponseEntity.ok(farmersRatings);
+    }
+
+    @DeleteMapping("/deleteFarmerById/{id}")
+	public ResponseEntity<Farmer> deleteFarmerById(@PathVariable String id){
+		return new ResponseEntity<Farmer>(adminClient.deleteFarmerById(id),HttpStatus.OK);
+	}
+    @GetMapping("/getAllTransactions")
+    public ResponseEntity<List<Transaction>> getAllTransaction(){
+    	return new ResponseEntity<List<Transaction>>(adminClient.getAllTransaction(),HttpStatus.OK);
     }
 }

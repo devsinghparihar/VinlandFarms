@@ -1,0 +1,58 @@
+/* ProfileDetails-profileDetails.css */
+.profileContainer {
+    padding: 1em;
+    background: #FF79C6;
+    height: 100vh;
+}
+  
+  /* Style for text input fields */
+  .form-control-profileDetails {
+    
+    border: 1px solid #BA68C8;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+  }
+  
+  /* Style for labels */
+  .labels-profileDetails {
+    font-size: 16px;
+    font-weight: bold;
+    color: #682773;
+  }
+  
+  /* Style for buttons */
+  .profile-button-profileDetails {
+    background: #682773;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .profile-button-profileDetails:hover {
+    background: #BA68C8;
+  }
+  
+  .profile-button-profileDetails:focus {
+    outline: none;
+  }
+  
+  /* Style for the star rating */
+  .rating-profileDetails {
+    font-size: 24px;
+    color: #ffac05; /* Star color */
+
+   
+  }
+  
+  /* Additional styling for specific fields */
+  /* Customize the styling for each field based on your needs */
+  /* Example:
+  .field-name-profileDetails {
+    /* Add specific styles here */
+  
+  

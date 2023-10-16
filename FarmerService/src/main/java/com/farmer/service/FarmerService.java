@@ -13,6 +13,7 @@ public interface FarmerService {
 	Farmer addFarmer(Farmer f);
 	List<Farmer> getAll();
 	Farmer findFarmerById(String id);
+	Farmer deleteFarmerById(String id);
 	Farmer findFarmerByEmail(String email);
 	Farmer addCrop(Crop c, String email);
 	UpdateDetailDTO updateFarmer(UpdateDetailDTO f,String email);

@@ -4,6 +4,7 @@ const initialState = {
     username: '',
     role: '',
     token: '',
+    id:''
   };
   
   const authReducer = (state = initialState, action) => {
@@ -15,6 +16,7 @@ const initialState = {
           username: action.payload.username,
           role: action.payload.role, // Store the role as a single variable
           token: action.payload.token,
+          id:action.payload.id,
         };
       case 'LOGOUT':
         return initialState;

@@ -72,8 +72,6 @@ public class FarmerServiceImpl implements FarmerService {
 		Farmer farmer = fr.findByEmail(email);
 		farmer.setName(f.getName());
 		farmer.setAge(f.getAge());
-		farmer.setPassword(f.getPassword());
-		farmer.setAccountNumber(f.getAccountNumber());
 		farmer.setGender(f.getGender());
 		farmer.setLocation(f.getLocation());
 		fr.save(farmer);
@@ -143,6 +141,14 @@ public class FarmerServiceImpl implements FarmerService {
 	public List<Transaction> findTransactionsByFarmerId(String id) {
 		// TODO Auto-generated method stub
 		return transactionClient.getFarmerHistory(id);
+	}
+
+	@Override
+	public Farmer deleteFarmerById(String id) {
+		// TODO Auto-generated method stub
+		Farmer farmer = fr.findById(id).get();
+		fr.deleteById(id);
+		return farmer;
 	}
 
 	

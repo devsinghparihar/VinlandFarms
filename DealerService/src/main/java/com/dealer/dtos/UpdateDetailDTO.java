@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 public class UpdateDetailDTO {
 	
 	private String name;
-	private String password;
+//	private String password;
 	private String gender;
 	private int age;
-	private String accountNumber;
-	private long accountBalance;
+//	private String accountNumber;
+//	private long accountBalance;
 
 }

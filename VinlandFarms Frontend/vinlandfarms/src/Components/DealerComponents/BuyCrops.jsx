@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './BuyCrops.css'; // Import your CSS for styling
+import { useSelector } from 'react-redux';
+import './BuyCrops.css';
 
 function BuyCrops() {
   const [cropList, setCropList] = useState([]);
   const [selectedCrop, setSelectedCrop] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const dealerId = useSelector(state => state.auth.id);
 
   useEffect(() => {
-    // Fetch the list of crop entities from the API
+    
     axios.get('http://localhost:5002/dealer/searchAllCrops ')
       .then((response) => {
         setCropList(response.data);
@@ -22,19 +24,20 @@ function BuyCrops() {
     if (selectedCrop) {
       // Extract information from the selected crop
       const { farmerId, cropType, cropPrice } = selectedCrop;
-      const dealerId = 'your_dealer_id'; // Replace with the actual dealer ID
+      
 
       // Calculate the estimated price
       const estimatedPrice = quantity * cropPrice;
 
-      // Call the buyCrop API with the selected quantity
-      axios.post(`/dealer/buyCrop/${farmerId}/${dealerId}/${cropType}/${quantity}`)
+      
+      // http://localhost:5006/dealer/buyCrop/1/1/1/1'
+      axios.put(`http://localhost:5002/dealer/buyCrop/${farmerId}/${dealerId}/${cropType}/${quantity}`)
         .then((response) => {
-          // Handle the purchase response here
+         
           console.log('Purchase successful:', response.data);
         })
         .catch((error) => {
-          // Handle purchase errors here
+         
           console.error('Error purchasing crop:', error);
         });
     }

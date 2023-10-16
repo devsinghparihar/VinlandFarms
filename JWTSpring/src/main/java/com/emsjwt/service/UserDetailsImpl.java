@@ -18,18 +18,28 @@ public class UserDetailsImpl implements UserDetails {
 	private String password;
 
 	private Collection<? extends GrantedAuthority> authorities;
+	private String id;
 
-	public UserDetailsImpl( String username,String password,Collection<? extends GrantedAuthority> authorities ) {
+	public UserDetailsImpl( String username,String password,Collection<? extends GrantedAuthority> authorities, String id ) {
 
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
+		this.id = id;
 	}
 
 	public static UserDetailsImpl getUser(Login user) {
 		List<GrantedAuthority> authorities =List.of(new SimpleGrantedAuthority(user.getRole()));
 
-		return new UserDetailsImpl(user.getUsername(), user.getPassword(), authorities);
+		return new UserDetailsImpl(user.getUsername(), user.getPassword(), authorities,user.getId());
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Override

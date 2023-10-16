@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +40,7 @@ public class FarmerController {
 		return new ResponseEntity<Farmer>(farmerService.addCrop(crop, email), HttpStatus.OK); 
 		
 	}
-	@PostMapping("/updateFarmer/{email}")
+	@PutMapping("/updateFarmer/{email}")
 	public ResponseEntity<UpdateDetailDTO> updateFarmer(@RequestBody UpdateDetailDTO update, @PathVariable String email ){
 		return new ResponseEntity<UpdateDetailDTO>(farmerService.updateFarmer(update, email), HttpStatus.OK); 
 		
@@ -76,6 +77,10 @@ public class FarmerController {
 	@GetMapping("/farmerTransactionHistory/{id}")
 	public ResponseEntity<List<Transaction>> getFarmerHistory(@PathVariable String id){
 		return new ResponseEntity<List<Transaction>>(farmerService.findTransactionsByFarmerId(id),HttpStatus.OK);
+	}
+	@DeleteMapping("/deleteFarmerById/{id}")
+	public ResponseEntity<Farmer> deleteFarmerById(@PathVariable String id){
+		return new ResponseEntity<Farmer>(farmerService.deleteFarmerById(id),HttpStatus.OK);
 	}
 
 }

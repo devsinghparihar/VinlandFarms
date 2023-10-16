@@ -2,17 +2,22 @@ package com.emsjwt.response;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+
 public class JSONResponse {
 	private String token;
 	private String type = "Bearer";
-
+	private String id;
 	private String username;
 
 	private List<String> roles;
 
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
+	
 
 	public JSONResponse(String accessToken, String username,List<String> roles) {
 		this.token = accessToken;
@@ -21,33 +26,12 @@ public class JSONResponse {
 
 		this.roles = roles;
 	}
-
-	public String getAccessToken() {
-		return token;
-	}
-
-	public void setAccessToken(String accessToken) {
+	public JSONResponse(String accessToken, String username,List<String> roles, String id) {
 		this.token = accessToken;
-	}
 
-	public String getTokenType() {
-		return type;
-	}
-
-	public void setTokenType(String tokenType) {
-		this.type = tokenType;
-	}
-
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
 		this.username = username;
+		this.id =id;
+		this.roles = roles;
 	}
-
-	public List<String> getRoles() {
-		return roles;
-	}
+	
 }

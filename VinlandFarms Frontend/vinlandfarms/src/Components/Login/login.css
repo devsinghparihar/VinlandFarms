@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+.section{
+    position: absolute;
+    height: 80vh;
+    width: 80%;
+    top: 100px;
+    left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logImg{
+    height: 400px;
+    width: 500px;
+    overflow: hidden;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    background-color: #232323;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logImg > img{
+    width: 99%;
+    height: 99%;
+}
+
+.form-control{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+    width: 500px;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    padding: 20px 50px;
+    color: #232323;
+}
+
+.inputFields{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 180px;
+    justify-content: center;
+}
+
+.login{
+    font-family: 'Open Sans';
+    font-size: 34px;
+    font-weight: 700;
+    color: #303030;
+    text-transform: uppercase;
+}
+
+label{
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Open Sans';
+}
+
+.text-field{
+    border: 1px solid #232323;
+    outline: none;
+    width: 300px;
+    border-radius: 20px;
+    padding: 5px ;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    transition: all 0.2s ease-in-out;
+    background: none;
+}
+
+.password-field{
+    border: 1px solid #232323;
+    outline: none;
+    width: 300px;
+    border-radius: 20px;
+    padding: 5px ;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    transition: all 0.2s ease-in-out;
+    background: none;
+}
+
+.text-field:focus, .password-field:focus{
+    border: 1px solid rgb(0, 115, 255);
+    width: 320px;
+}
+

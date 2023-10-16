@@ -26,7 +26,7 @@ public interface FarmerClient {
 	public Farmer registerFarmer(@RequestBody Farmer farmer);
 	@PostMapping("/addCrop/{email}")
 	public Farmer addCrop(@RequestBody Crop crop, @PathVariable String email );
-	@PostMapping("/updateFarmer/{email}")
+	@PutMapping("/updateFarmer/{email}")
 	public FarmerUpdateDTO updateFarmer(@RequestBody FarmerUpdateDTO update, @PathVariable String email );
 	@PutMapping("/updateFarmer")
 	public Farmer updateFarmer(@RequestBody Farmer farmer );

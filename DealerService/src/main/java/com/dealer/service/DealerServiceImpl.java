@@ -79,10 +79,10 @@ public class DealerServiceImpl implements DealerService {
 		Dealer farmer = dr.findByEmail(email);
 		farmer.setName(f.getName());
 		farmer.setAge(f.getAge());
-		farmer.setPassword(f.getPassword());
-		farmer.setAccountNumber(f.getAccountNumber());
+//		farmer.setPassword(f.getPassword());
+//		farmer.setAccountNumber(f.getAccountNumber());
 		farmer.setGender(f.getGender());
-		farmer.setAccountBalance(f.getAccountBalance());
+//		farmer.setAccountBalance(f.getAccountBalance());
 		dr.save(farmer);
 		return f;
 	}

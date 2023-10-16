@@ -40,8 +40,8 @@ public class DealerController {
 
     @PostMapping("/updateDealer/{email}")
     public ResponseEntity<DealerUpdateDTO> updateDealer(@RequestBody DealerUpdateDTO update, @PathVariable String email) {
-    	String password = encoder.encode(update.getPassword());
-    	update.setPassword(password);
+//    	String password = encoder.encode(update.getPassword());
+//    	update.setPassword(password);
         DealerUpdateDTO updatedDealer = dealerClient.updateDealer(update, email);
         return ResponseEntity.ok(updatedDealer);
     }

@@ -45,19 +45,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if(farmerClient.findFarmerByEmail(email) != null) {
 			Farmer user = farmerClient.findFarmerByEmail(email);
 			Login  userModel = new Login 
-					(user.getEmail(), user.getPassword(), user.getRole());
+					(user.getEmail(), user.getPassword(), user.getRole(),user.getFarmerId());
 			return userModel;
 		}
 		else if(dealerClient.findDealerByEmail(email) != null) {
 			Dealer user = dealerClient.findDealerByEmail(email);
 			Login  userModel = new Login 
-					(user.getEmail(), user.getPassword(), user.getRole());
+					(user.getEmail(), user.getPassword(), user.getRole(),user.getDealerId());
 			return userModel;
 		}
 		else if(adminClient.findByEmail(email) != null) {
 			Admin user = adminClient.findByEmail(email);
 			Login userModel = new Login 
-					(user.getEmail(), user.getPassword(), user.getRole());
+					(user.getEmail(), user.getPassword(), user.getRole(),user.getAdminId());
 			return userModel;
 		}
 		return null;

@@ -42,10 +42,10 @@ public class FarmerController {
         return ResponseEntity.ok(farmer);
     }
 
-    @PostMapping("/updateFarmer/{email}")
+    @PutMapping("/updateFarmer/{email}")
     public ResponseEntity<FarmerUpdateDTO> updateFarmer(@RequestBody FarmerUpdateDTO update, @PathVariable String email) {
-    	String password = encoder.encode(update.getPassword());
-    	update.setPassword(password);
+//    	String password = encoder.encode(update.getPassword());
+//    	update.setPassword(password);
         FarmerUpdateDTO updatedFarmer = farmerClient.updateFarmer(update, email);
         return ResponseEntity.ok(updatedFarmer);
     }
