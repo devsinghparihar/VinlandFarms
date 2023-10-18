@@ -3,6 +3,7 @@ package com.emsjwt.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -86,6 +88,12 @@ public class DealerController {
         Transaction transaction = dealerClient.buyCrop(farmerId, dealerId, cropType, quantity);
         return ResponseEntity.ok(transaction);
     }
+    
+    @PutMapping("/addMoneyToWallet/{id}/{amount}")
+	public ResponseEntity<String> addMoneyToWallet(@PathVariable String id, @PathVariable long amount ){
+		return new ResponseEntity<String>(dealerClient.addMoneyToWallet(id, amount), HttpStatus.OK); 
+		
+	}
 
     @GetMapping("/dealerTransactionHistory/{id}")
     public ResponseEntity<List<Transaction>> getDealerHistory(@PathVariable String id) {

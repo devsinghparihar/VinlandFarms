@@ -96,6 +96,10 @@ public class AdminController {
 	public ResponseEntity<Farmer> deleteFarmerById(@PathVariable String id){
 		return new ResponseEntity<Farmer>(adminService.deleteFarmerById(id),HttpStatus.OK);
 	}
+    @DeleteMapping("/deleteDealerById/{id}")
+	public ResponseEntity<Dealer> deleteDealerById(@PathVariable String id){
+		return new ResponseEntity<Dealer>(adminService.deleteDealerById(id),HttpStatus.OK);
+	}
     @GetMapping("/getAllTransactions")
     public ResponseEntity<List<Transaction>> getAllTransaction(){
     	return new ResponseEntity<>(adminService.getAllTransaction(),HttpStatus.OK);

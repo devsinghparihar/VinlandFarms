@@ -16,6 +16,8 @@ public interface DealerService {
 	UpdateDetailDTO updateDealer(UpdateDetailDTO f,String email);
 	Dealer findDealerById(String id);
 	Dealer findDealerByEmail(String email);
+	Dealer deleteDealerById(String id);
+	String addMoneyToWallet(String id,long money);
 	Transaction buyCrop(String farmerId,String dealerId, String cropType, int quantity);
 	List<Transaction> findTransactionsByDealerId(String id);
 	boolean runScan(String dealerId);

@@ -1,7 +1,7 @@
 /* ProfileDetails-profileDetails.css */
 .profileContainer {
     padding: 1em;
-    background: #FF79C6;
+    background: #F8F8F2;
     height: 100vh;
 }
   
@@ -10,6 +10,7 @@
     
     border: 1px solid #BA68C8;
     border-radius: 4px;
+  
     padding: 10px;
     margin: 5px 0;
     width: 100%;
@@ -48,6 +49,8 @@
 
    
   }
+  
+
   
   /* Additional styling for specific fields */
   /* Customize the styling for each field based on your needs */

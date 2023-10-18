@@ -3,8 +3,8 @@ package com.admin.clients;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,7 +30,8 @@ public interface DealerClient {
 	
 	@PutMapping("/updateDealer/{email}")
 	public DealerUpdateDTO updateDealer(@RequestBody DealerUpdateDTO update, @PathVariable String email );
-	
+	@DeleteMapping("/deleteDealerById/{id}")
+	public Dealer deleteDealerById(@PathVariable String id);
 	
 	
 }

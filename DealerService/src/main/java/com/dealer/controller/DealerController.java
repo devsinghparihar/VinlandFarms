@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +52,11 @@ public class DealerController {
 		return new ResponseEntity<UpdateDetailDTO>(dealerService.updateDealer(update, email), HttpStatus.OK); 
 		
 	}
+	@PutMapping("/addMoneyToWallet/{id}/{amount}")
+	public ResponseEntity<String> addMoneyToWallet(@PathVariable String id, @PathVariable long amount ){
+		return new ResponseEntity<String>(dealerService.addMoneyToWallet(id, amount), HttpStatus.OK); 
+		
+	}
 	
 	@GetMapping("/getAllDealers")
 	public ResponseEntity<List<Dealer>> getAllDealers(){
@@ -90,6 +96,10 @@ public class DealerController {
 	@GetMapping("/findRequirements/{id}")
 	public ResponseEntity<List<String>> findRequirements(@PathVariable String id){
 		return new ResponseEntity<List<String>>(dealerService.findRequirements(id),HttpStatus.OK);
+	}
+	@DeleteMapping("/deleteDealerById/{id}")
+	public ResponseEntity<Dealer> deleteDealerById(@PathVariable String id){
+		return new ResponseEntity<Dealer>(dealerService.deleteDealerById(id),HttpStatus.OK);
 	}
 	
 	

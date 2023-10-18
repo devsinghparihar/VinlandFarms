@@ -36,7 +36,8 @@ public interface DealerClient {
 	public List<CropDetailDTO> getAllCrops();
 	@GetMapping("/searchCropsByType/{type}")
 	public List<CropDetailDTO> getCropsByType(@PathVariable String type);
-	
+	@PutMapping("/addMoneyToWallet/{id}/{amount}")
+	public String addMoneyToWallet(@PathVariable String id, @PathVariable long amount );
 	
 	@GetMapping("/findDealerById/{Id}")
 	public Dealer findDealerrById(@PathVariable String Id);

@@ -133,6 +133,11 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return farmerClient.deleteFarmerById(id);
 	}
+	@Override
+	public Dealer deleteDealerById(String id) {
+		// TODO Auto-generated method stub
+		return dealerClient.deleteDealerById(id);
+	}
 
 	@Override
 	public List<Transaction> getAllTransaction() {

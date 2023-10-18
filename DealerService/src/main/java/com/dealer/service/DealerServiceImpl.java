@@ -200,6 +200,23 @@ public class DealerServiceImpl implements DealerService {
 		return availableCrops;
 	}
 
+	@Override
+	public Dealer deleteDealerById(String id) {
+		// TODO Auto-generated method stub
+		Dealer dealer = dr.findById(id).get();
+		dr.deleteById(id);
+		return dealer;
+	}
+
+	@Override
+	public String addMoneyToWallet(String id, long money) {
+		// TODO Auto-generated method stub
+		Dealer d = dr.findById(id).get();
+		d.setAccountBalance(d.getAccountBalance()+money);
+		dr.save(d);
+		return "Balance updated, current balance: "+d.getAccountBalance();
+	}
+	
 	
 
 }

@@ -14,8 +14,8 @@ function AdminDashboard() {
           <div className="card">
             <img src="/images/farmer4.jpg" className="card-img-top" alt="Add Crop" />
             <div className="card-body">
-              <h2 className="card-title">View Farmers</h2>
-              <p className="card-text">View all listed farmers.</p>
+              <h2 className="card-title">Farmer Management</h2>
+              <p className="card-text">Manage Farmers.</p>
               <Link to="/farmerPanel" className="btn btn-primary">View</Link>
             </div>
           </div>
@@ -25,9 +25,9 @@ function AdminDashboard() {
           <div className="card">
             <img src="/images/farmer3.jpg" className="card-img-top" alt="Add Crop" />
             <div className="card-body">
-              <h2 className="card-title">View Dealers</h2>
-              <p className="card-text">View all listed dealers.</p>
-              <Link to="/buyCrop" className="btn btn-primary">View</Link>
+              <h2 className="card-title">Dealer Management</h2>
+              <p className="card-text">Manage dealers.</p>
+              <Link to="/dealerPanel" className="btn btn-primary">View</Link>
             </div>
           </div>
         </div>

@@ -18,6 +18,7 @@ public interface AdminService {
 	Admin updateAdmin(Admin admin, String id);
 	Admin findAdminByEmail(String email);
 	Farmer deleteFarmerById(String id);
+	Dealer deleteDealerById(String id);
 	List<Farmer> getActiveFarmers();
 	List<Farmer> getInactiveFarmers();
 	List<Dealer> getActiveDealers();

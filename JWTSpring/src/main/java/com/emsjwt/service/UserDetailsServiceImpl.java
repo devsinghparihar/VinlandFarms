@@ -13,7 +13,6 @@ import com.emsjwt.clients.DealerClient;
 import com.emsjwt.clients.FarmerClient;
 import com.emsjwt.model.Admin;
 import com.emsjwt.model.Dealer;
-import com.emsjwt.model.EmployeeModel;
 import com.emsjwt.model.Farmer;
 import com.emsjwt.model.Login;
 import com.emsjwt.model.UserModel;

@@ -21,10 +21,7 @@ import com.admin.model.Farmer;
 @FeignClient(url = "http://localhost:5001/farmer",name = "farmerClient")
 public interface FarmerClient {
 	
-//	@GetMapping("/getAllCrops")
-//	public List<CropDetailDTO> getAllCrops();
-//	@GetMapping("/getCropsByType/{type}")
-//	public List<CropDetailDTO> getCropsByType(@PathVariable String type);
+
 	
 	@GetMapping("/findFarmerById/{Id}")
 	public Farmer findFarmerById(@PathVariable String Id);

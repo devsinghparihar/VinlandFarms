@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import '../Login/login.css'
 
 function FarmerRegistration() {
   const [name, setName] = useState('');
@@ -43,7 +44,65 @@ function FarmerRegistration() {
     };
 
   return (
-    <div>
+    <>
+      <div className="section log">
+        <div className="logImg">
+          <img src="/images/admin.jpg" alt="" />
+        </div>
+        <form action="" className="form-control" >
+          <h1 className="login">Welcome to VinlandFarms</h1>
+          <div className="inputFields" id='inp'>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              // value={emailCheck}
+              // onChange={handleEmailChange}
+              required
+              className="text-field"
+              // ref={email}
+            />
+            {/* {!isEmailValid(emailCheck) && (
+              <span className="badge rounded-pill text-bg-danger">Email not valid</span>
+            )} */}
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="text-field" required />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="text-field" required />
+            <select value={gender} onChange={(e) => setGender(e.target.value)} className="text-field" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} className="text-field" required />
+          <input type="number" value={age} onChange={(e) => setAge(e.target.value)} className="text-field" required />
+          <input type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} className="text-field" required />
+
+
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              // value={passwordCheck}
+              // onChange={handlePasswordChange}
+              required
+              className="password-field"
+              // ref={password}
+            />
+            {/* {!isPasswordValid(passwordCheck) && (
+              <span className="badge rounded-pill text-bg-danger">Password not valid</span>
+            )} */}
+          </div>
+          <button type="button" onClick={handleSubmit}>Login</button>
+        </form>
+      </div>
+    </>
+  );
+}
+
+export default FarmerRegistration;
+{/* <div>
       <h2>Farmer Registration</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -81,8 +140,4 @@ function FarmerRegistration() {
         </div>
         <button type="submit">Register</button>
       </form>
-    </div>
-  );
-}
-
-export default FarmerRegistration;
+    </div> */}
