@@ -6,12 +6,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class FarmerException extends RuntimeException {
-	
-	public FarmerException(String msg)
-	{
+@ResponseStatus(HttpStatus.ALREADY_REPORTED)
+public class EmailAlreadyExists extends RuntimeException {
+	public EmailAlreadyExists(String msg) {
 		super(msg);
 	}
-
 }

@@ -11,6 +11,11 @@ import com.farmer.clients.TransactionClient;
 import com.farmer.dtos.CropDetailDTO;
 import com.farmer.dtos.EmailModel;
 import com.farmer.dtos.UpdateDetailDTO;
+import com.farmer.exceptions.EmailAlreadyExists;
+import com.farmer.exceptions.FarmerException;
+import com.farmer.exceptions.FarmerNotFoundException;
+import com.farmer.exceptions.NoCropsFoundException;
+import com.farmer.exceptions.NoTransactionFoundException;
 import com.farmer.model.Crop;
 import com.farmer.model.Farmer;
 import com.farmer.model.Transaction;
@@ -30,7 +35,10 @@ public class FarmerServiceImpl implements FarmerService {
 	
 	
 	@Override
-	public Farmer addFarmer(Farmer f) {
+	public Farmer addFarmer(Farmer f) throws EmailAlreadyExists {
+		if(fr.findByEmail(f.getEmail()) !=null ) {
+			throw new EmailAlreadyExists("User with email"+f.getEmail()+" already exists");
+		}
 		EmailModel email = new EmailModel();
 		email.setTo(f.getEmail());
 		email.setSubject("Welcome to Vinland Farms");
@@ -46,15 +54,18 @@ public class FarmerServiceImpl implements FarmerService {
 				+ "\r\n"
 				+ "Best regards,\r\n"
 				+ "The Vinland Farms Team");
-		emailClient.sendMail(email);
+		emailClient.sendMail(email);  //log email sent or not 
 		return fr.save(f);
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List<Farmer> getAll() {
+	public List<Farmer> getAll() throws FarmerException {
 		// TODO Auto-generated method stub
+		if(fr.findAll().isEmpty()) {
+			throw new FarmerException("No Farmer has registered yet");
+		}
 		return fr.findAll();
 	}
 
@@ -67,8 +78,11 @@ public class FarmerServiceImpl implements FarmerService {
 	}
 
 	@Override
-	public UpdateDetailDTO updateFarmer(UpdateDetailDTO f, String email) {
+	public UpdateDetailDTO updateFarmer(UpdateDetailDTO f, String email) throws FarmerNotFoundException {
 		// TODO Auto-generated method stub
+		if(fr.findByEmail(email) == null) {
+			throw new FarmerNotFoundException("No Farmer with email "+email+" found");
+		}
 		Farmer farmer = fr.findByEmail(email);
 		farmer.setName(f.getName());
 		farmer.setAge(f.getAge());
@@ -81,14 +95,14 @@ public class FarmerServiceImpl implements FarmerService {
 	}
 
 	@Override
-	public List<CropDetailDTO> getAllCrops() {
+	public List<CropDetailDTO> getAllCrops() throws NoCropsFoundException {
 		// TODO Auto-generated method stub
 		List<Farmer> all = fr.findAll();
 		List<CropDetailDTO> allCrops = new ArrayList<>();
 		for(Farmer f: all) {
 			
 			for(Crop c : f.getCrops()) {
-				CropDetailDTO d = new CropDetailDTO();
+				CropDetailDTO d = new CropDetailDTO(); 
 				d.setFarmerId(f.getFarmerId());
 				d.setName(f.getName());
 				d.setEmail(f.getEmail());
@@ -103,11 +117,14 @@ public class FarmerServiceImpl implements FarmerService {
 			
 			
 		}
+		if(allCrops.isEmpty()) {
+			throw new NoCropsFoundException("No Crops Found in inventory");
+		}
 		return allCrops;
 	}
 
 	@Override
-	public List<CropDetailDTO> getCropsByCropType(String cropType) {
+	public List<CropDetailDTO> getCropsByCropType(String cropType) throws NoCropsFoundException {
 		// TODO Auto-generated method stub
 		List<CropDetailDTO> filtertedCrops = new ArrayList<>();
 		for(CropDetailDTO details : this.getAllCrops()) {
@@ -115,37 +132,55 @@ public class FarmerServiceImpl implements FarmerService {
 				filtertedCrops.add(details);
 			}
 		}
+		if(filtertedCrops.isEmpty()) {
+			throw new NoCropsFoundException("No Crops of type "+cropType+" found in inventory");
+		}
 		return filtertedCrops;
 	}
 
 	@Override
-	public Farmer findFarmerById(String id) {
+	public Farmer findFarmerById(String id) throws FarmerNotFoundException {
 		// TODO Auto-generated method stub
-		
+		if(fr.findById(id).isEmpty()) {
+			throw new FarmerNotFoundException("Farmer with id "+id+" does not exist");
+		}
 		return fr.findById(id).get();
 	}
 
 	@Override
-	public Farmer findFarmerByEmail(String email) {
+	public Farmer findFarmerByEmail(String email) throws FarmerNotFoundException {
 		// TODO Auto-generated method stub
+		if(fr.findByEmail(email) == null) {
+			throw new FarmerNotFoundException("No Farmer with email "+email+" found");
+		}
 		return fr.findByEmail(email);
 	}
 
 	@Override
-	public Farmer updateFarmer(Farmer farmer) {
+	public Farmer updateFarmer(Farmer farmer) throws FarmerNotFoundException {
+		String id = farmer.getFarmerId();
+		if(fr.findById(id).isEmpty()) {
+			throw new FarmerNotFoundException("Farmer with id "+id+" does not exist");
+		}
 		// TODO Auto-generated method stub
 		return fr.save(farmer);
 	}
 
 	@Override
-	public List<Transaction> findTransactionsByFarmerId(String id) {
+	public List<Transaction> findTransactionsByFarmerId(String id) throws NoTransactionFoundException {
 		// TODO Auto-generated method stub
+		if(transactionClient.getFarmerHistory(id).isEmpty()) {
+			throw new NoTransactionFoundException("No Transaction is associated with this farmer");
+		}
 		return transactionClient.getFarmerHistory(id);
 	}
 
 	@Override
-	public Farmer deleteFarmerById(String id) {
+	public Farmer deleteFarmerById(String id) throws FarmerNotFoundException {
 		// TODO Auto-generated method stub
+		if(fr.findById(id).isEmpty()) {
+			throw new FarmerNotFoundException("Farmer with id "+id+" does not exist");
+		}
 		Farmer farmer = fr.findById(id).get();
 		fr.deleteById(id);
 		return farmer;

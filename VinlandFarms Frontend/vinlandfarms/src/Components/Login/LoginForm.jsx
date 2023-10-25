@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../actions/authActions';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import './login.css';
 
@@ -60,9 +60,9 @@ function LoginForm() {
 
 
       console.log(response.data)
-      const { username, roles, accessToken, id } = response.data;
+      const { username, roles, token, id } = response.data;
       const role = roles[0];
-      dispatch(loginSuccess(username, role, accessToken, id));
+      dispatch(loginSuccess(username, role, token, id));
 
       if (location.state && location.state.from && location.state.userRole == role) {
         history.replace(location.state.from);
@@ -132,6 +132,8 @@ function LoginForm() {
           <button type="button" onClick={handleLogin}>Login</button>
         </form>
       </div>
+      
+      <p style={{ marginTop: "10px" , marginLeft:"30em" }}>Don't have an account ? Sign Up as <Link to="/farmer-registration">Farmer</Link>,<Link to="/dealer-registration">Dealer</Link></p>
     </>
   );
 }

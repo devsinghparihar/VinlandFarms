@@ -35,7 +35,7 @@ const UpdateFarmer = () => {
       //     Authorization: `Bearer ${jwtToken}`,
       //   },
       // };
-      console.log(`http://localhost:5003/admin/updateFarmer/${email}`)
+      console.log(`http://localhost:5003/admin/updateFarmer/${email}`,formData)
       const response = await axios.put(
         `http://localhost:5003/admin/updateFarmer/${email}`,
         formData
@@ -72,7 +72,7 @@ const UpdateFarmer = () => {
                 <img
                   className="rounded-circle mt-5"
                   width="150px"
-                  src="/images/farmer1.jpg"
+                  src="https://thispersondoesnotexist.com/"
                   alt="Profile"
                 />
                 <span className="font-weight-bold">{profileData.name}</span>

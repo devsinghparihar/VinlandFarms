@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import '../Login/login.css'
+import './FarmerRegistration.css'; // Import your CSS file for styling
 
 function FarmerRegistration() {
   const [name, setName] = useState('');
@@ -12,7 +12,6 @@ function FarmerRegistration() {
   const [age, setAge] = useState(0);
   const [accountNumber, setAccountNumber] = useState('');
   const history = useHistory();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,119 +24,115 @@ function FarmerRegistration() {
       location,
       age,
       accountNumber,
-      
     };
 
     try {
-        
-        
-        const response = await axios.post('http://localhost:5006/public/registerFarmer', formData);
-  
-       
-        console.log('Registration successful:', response.data);
-        alert("Registration succcessfull... Check your email for confirmation\nRedirecting to login page");
-        history.push('/login');
-      } catch (error) {
-        
-        console.error('Registration failed:', error);
-      }
-    };
+      const response = await axios.post('http://localhost:5006/public/registerFarmer', formData);
+
+      console.log('Registration successful:', response.data);
+      alert("Registration successful... Check your email for confirmation\nRedirecting to the login page");
+      history.push('/login');
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
+  };
 
   return (
-    <>
-      <div className="section log">
-        <div className="logImg">
-          <img src="/images/admin.jpg" alt="" />
-        </div>
-        <form action="" className="form-control" >
-          <h1 className="login">Welcome to VinlandFarms</h1>
-          <div className="inputFields" id='inp'>
-            <label htmlFor="email">Email</label>
+    <div className="registration-container">
+      <div className="registration-image">
+        <img src="/images/farmer.jpg" alt="Registration Image" className="registration-image" />
+      </div>
+      <div className="registration-form">
+        <h2 className="registration-heading">Farmer Registration</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            {/* <label className="form-label">Name:</label> */}
+            <input
+              type="text"
+              value={name}
+              placeholder='Enter Name'
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            {/* <label className="form-label">Email:</label> */}
             <input
               type="email"
-              id="email"
-              name="email"
-              // value={emailCheck}
-              // onChange={handleEmailChange}
+              value={email}
+              placeholder='Enter Email'
+              onChange={(e) => setEmail(e.target.value)}
               required
-              className="text-field"
-              // ref={email}
+              className="form-input"
             />
-            {/* {!isEmailValid(emailCheck) && (
-              <span className="badge rounded-pill text-bg-danger">Email not valid</span>
-            )} */}
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="text-field" required />
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="text-field" required />
-            <select value={gender} onChange={(e) => setGender(e.target.value)} className="text-field" required>
-            <option value="">Select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-          <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} className="text-field" required />
-          <input type="number" value={age} onChange={(e) => setAge(e.target.value)} className="text-field" required />
-          <input type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} className="text-field" required />
-
-
-            <label htmlFor="password">Password</label>
+          </div>
+          <div className="form-group">
+            {/* <label className="form-label">Password:</label> */}
             <input
               type="password"
-              id="password"
-              name="password"
-              // value={passwordCheck}
-              // onChange={handlePasswordChange}
+              value={password}
+              placeholder='Enter Password'
+              onChange={(e) => setPassword(e.target.value)}
               required
-              className="password-field"
-              // ref={password}
+              className="form-input"
             />
-            {/* {!isPasswordValid(passwordCheck) && (
-              <span className="badge rounded-pill text-bg-danger">Password not valid</span>
-            )} */}
           </div>
-          <button type="button" onClick={handleSubmit}>Login</button>
+          <div className="form-group">
+            {/* <label className="form-label">Gender:</label> */}
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              required
+              className="form-input"
+              
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div className="form-group">
+            {/* <label className="form-label">Location:</label> */}
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+              placeholder='Enter Location'
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            {/* <label className="form-label">Age:</label> */}
+            <input
+              type="number"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              required
+              placeholder='Enter Age'
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            {/* <label className="form-label">Account Number:</label> */}
+            <input
+              type="text"
+              value={accountNumber}
+              onChange={(e) => setAccountNumber(e.target.value)}
+              required
+              placeholder='Enter A/C NO'
+              className="form-input"
+            />
+          </div>
+          <button type="submit" className="registration-button">
+            Register
+          </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 
 export default FarmerRegistration;
-{/* <div>
-      <h2>Farmer Registration</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <div>
-          <label>Gender:</label>
-          <select value={gender} onChange={(e) => setGender(e.target.value)} required>
-            <option value="">Select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div>
-          <label>Location:</label>
-          <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required />
-        </div>
-        <div>
-          <label>Age:</label>
-          <input type="number" value={age} onChange={(e) => setAge(e.target.value)} required />
-        </div>
-        <div>
-          <label>Account Number:</label>
-          <input type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} required />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-    </div> */}

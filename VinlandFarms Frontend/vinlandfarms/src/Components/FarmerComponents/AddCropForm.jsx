@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import './ProfileDetails'
+import generateConfig from '../AuthConfig/AuthHeader';
+
 
 function AddCropForm() {
   const [profileData, setProfileData] = useState(null);
@@ -22,18 +24,18 @@ function AddCropForm() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5001/farmer/findFarmerById/${id}`)
+    fetch(`http://localhost:4865/farmer/findFarmerById/${id}`,generateConfig(jwtToken))
       .then((response) => response.json())
       .then((data) => setProfileData(data))
       .catch((error) => console.error('Error fetching data:', error));
   }, [id]);
     
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const api = `http://localhost:5001/farmer/addCrop/${email}`;
+        const api = `http://localhost:4865/farmer/addCrop/${email}`;
         console.log(formData);
-        const response =  axios.post(api, formData);
+        const response = await axios.post(api,formData,generateConfig(jwtToken) );
         console.log('Crop posted successfully:', response.data);
         alert("crop posted successfully");
         history.push('/FarmerDashboard');
@@ -52,7 +54,7 @@ function AddCropForm() {
             <img
               className="rounded-circle mt-5"
               width="150px"
-              src="/images/farmer1.jpg"
+              src="https://thispersondoesnotexist.com/"
               alt="Profile"
             />
             <span className="font-weight-bold">{profileData.name}</span>

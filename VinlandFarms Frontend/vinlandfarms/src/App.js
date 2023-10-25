@@ -30,6 +30,7 @@ function App() {
         <Navbar />
         <div className="App">
           <Switch>
+          <Route exact path="/" component={LoginForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/farmer-registration" component={FarmerRegistration} />
             <Route path="/dealer-registration" component={DealerRegistration} />

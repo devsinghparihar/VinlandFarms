@@ -5,9 +5,9 @@ import axios from 'axios';
 
 const ProfileDetails = () => {
   const [profileData, setProfileData] = useState(null);
+  const token = useSelector((state) => state.auth.token);   
   const id = useSelector((state) => state.auth.id);
   const email = useSelector((state) => state.auth.username);
-  const jwtToken = useSelector((state) => state.auth.token);
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -23,19 +23,18 @@ const ProfileDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
 
-      // const config = {
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     Authorization: `Bearer ${jwtToken}`,
-      //   },
-      // };
-      console.log(formData)
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+   
       const response = await axios.put(
-        `http://localhost:5001/farmer/updateFarmer/${email}`,
-        formData
-
+        `http://localhost:4865/farmer/updateFarmer/${email}`,formData,config
       );
 
       console.log('Farmer details updated:', response.data);
@@ -47,7 +46,13 @@ const ProfileDetails = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5001/farmer/findFarmerById/${id}`)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    fetch(`http://localhost:4865/farmer/findFarmerById/${id}`,config)
       .then((response) => response.json())
       .then((data) => setProfileData(data))
       .catch((error) => console.error('Error fetching data:', error));
@@ -67,7 +72,7 @@ const ProfileDetails = () => {
                 <img
                   className="rounded-circle mt-5"
                   width="150px"
-                  src="/images/farmer1.jpg"
+                  src="https://thispersondoesnotexist.com/"
                   alt="Profile"
                 />
                 <span className="font-weight-bold">{profileData.name}</span>

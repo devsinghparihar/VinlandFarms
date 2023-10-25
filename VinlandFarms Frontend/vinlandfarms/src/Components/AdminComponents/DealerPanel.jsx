@@ -8,6 +8,7 @@ const DealerPanel = () => {
     const [viewActiveDealers, setViewActiveDealers] = useState(false);
     const [viewInactiveDealers, setViewInactiveDealers] = useState(false);
     const history = useHistory();
+   
 
     useEffect(() => {
         

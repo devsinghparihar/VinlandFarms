@@ -20,7 +20,6 @@ Exception response JSON
 fallback
 
 functionality
-Delete 
 Subscribe crop 
 generate report
 add requirement

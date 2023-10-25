@@ -29,7 +29,7 @@ public class EmailController {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("Failed",HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>("Failed , Your firewall is blocking the connection",HttpStatus.OK);
 			// TODO: handle exception
 		}
 		

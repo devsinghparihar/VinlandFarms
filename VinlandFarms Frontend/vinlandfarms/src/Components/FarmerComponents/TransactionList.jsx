@@ -5,10 +5,20 @@ import { useSelector } from 'react-redux';
 function FarmerTransactionList() {
   const [transactions, setTransactions] = useState([]);
   const id = useSelector(state => state.auth.id);
+  const token = useSelector((state) => state.auth.token);
+
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   useEffect(() => {
+    
     // Fetch transactions from your API
-    axios.get(`http://localhost:5001/farmer/farmerTransactionHistory/${id}`)
+    axios.get(`http://localhost:4865/farmer/farmerTransactionHistory/${id}`,config)
       .then((response) => {
         setTransactions(response.data);
       })

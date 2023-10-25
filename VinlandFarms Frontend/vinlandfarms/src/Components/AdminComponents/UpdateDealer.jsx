@@ -67,7 +67,7 @@ const UpdateDealer = () => {
                                 <img
                                     className="rounded-circle mt-5"
                                     width="150px"
-                                    src="/images/farmer1.jpg"
+                                    src="https://thispersondoesnotexist.com/"
                                     alt="Profile"
                                 />
                                 <span className="font-weight-bold">{profileData.name}</span>

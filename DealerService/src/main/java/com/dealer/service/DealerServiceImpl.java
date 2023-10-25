@@ -1,7 +1,10 @@
 package com.dealer.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +16,10 @@ import com.dealer.dtos.CropDetailDTO;
 import com.dealer.dtos.EmailModel;
 import com.dealer.dtos.TransactionDTO;
 import com.dealer.dtos.UpdateDetailDTO;
+import com.dealer.exceptions.DealerException;
+import com.dealer.exceptions.EmailAlreadyExists;
 import com.dealer.exceptions.InvalidTransaction;
+import com.dealer.exceptions.ResourceNotFoundException;
 import com.dealer.model.Crop;
 import com.dealer.model.Dealer;
 import com.dealer.model.Farmer;
@@ -36,8 +42,10 @@ public class DealerServiceImpl implements DealerService {
 	TransactionClient transactionClient;
 
 	@Override
-	public Dealer addDealer(Dealer d) {
-		
+	public Dealer addDealer(Dealer d)  {
+		if(dr.findByEmail(d.getEmail()) !=null ) {
+			throw new EmailAlreadyExists("User with email"+d.getEmail()+" already exists");
+		}
 		EmailModel email = new EmailModel();
 		email.setTo(d.getEmail());
 		email.setSubject("Welcome to Vinland Farms");
@@ -61,6 +69,10 @@ public class DealerServiceImpl implements DealerService {
 
 	@Override
 	public List<Dealer> getAll() {
+		
+		if(dr.findAll().isEmpty()) {
+			throw new ResourceNotFoundException("No dealer has registered yet");
+		}
 		// TODO Auto-generated method stub
 		return dr.findAll();
 	}
@@ -68,6 +80,9 @@ public class DealerServiceImpl implements DealerService {
 	@Override
 	public Dealer addRequirement(String requirement, String email) {
 		// TODO Auto-generated method stub
+		if(dr.findByEmail(email) == null) {
+			throw new ResourceNotFoundException("Dealer with "+email+" not found");
+		}
 		Dealer dealer = dr.findByEmail(email);
 		dealer.addReqirements(requirement);
 		return dr.save(dealer);
@@ -76,6 +91,9 @@ public class DealerServiceImpl implements DealerService {
 	@Override
 	public UpdateDetailDTO updateDealer(UpdateDetailDTO f, String email) {
 		// TODO Auto-generated method stub
+		if(dr.findByEmail(email) == null) {
+			throw new ResourceNotFoundException("Dealer with "+email+" not found");
+		}
 		Dealer farmer = dr.findByEmail(email);
 		farmer.setName(f.getName());
 		farmer.setAge(f.getAge());
@@ -90,12 +108,18 @@ public class DealerServiceImpl implements DealerService {
 	@Override
 	public Dealer findDealerById(String id) {
 		// TODO Auto-generated method stub
+		if(dr.findById(id).isEmpty()) {
+			throw new ResourceNotFoundException("Dealer with "+id+" not found");
+		}
 		return dr.findById(id).get();
 	}
 
 	@Override
 	public Dealer findDealerByEmail(String email) {
 		// TODO Auto-generated method stub
+		if(dr.findByEmail(email) == null) {
+			throw new ResourceNotFoundException("Dealer with "+email+" not found");
+		}
 		return dr.findByEmail(email);
 	}
 	public static double calculateTotal(int price,int quantity) {
@@ -105,6 +129,9 @@ public class DealerServiceImpl implements DealerService {
 	@Override
 	public Transaction buyCrop(String farmerId, String dealerId, String cropType, int quantity) throws InvalidTransaction {
 		// TODO Auto-generated method stub
+		if(farmerClient.findFarmerById(farmerId) ==null || dr.findById(dealerId)==null ||  quantity <= 0 ){
+			throw new InvalidTransaction("Invalid request");
+		}
 		Farmer farmer = farmerClient.findFarmerById(farmerId);
 		Dealer dealer = dr.findById(dealerId).get();
 		Double totalPrice = 0.0;
@@ -161,11 +188,17 @@ public class DealerServiceImpl implements DealerService {
 	@Override
 	public List<Transaction> findTransactionsByDealerId(String id) {
 		// TODO Auto-generated method stub
+		if(dr.findById(id).isEmpty()) {
+			throw new ResourceNotFoundException("Dealer with "+id+" not found");
+		}
 		return transactionClient.getDealerHistory(id);
 	}
 
 	@Override
 	public boolean runScan(String dealerId) {
+		if(dr.findById(dealerId).isEmpty()) {
+			throw new ResourceNotFoundException("Dealer with "+dealerId+" not found");
+		}
 		Dealer dealer = dr.findById(dealerId).get();
 		List<String> required = dealer.getRequirements();
 		List<String> availableCrops = new ArrayList<>();
@@ -185,6 +218,9 @@ public class DealerServiceImpl implements DealerService {
 
 	@Override
 	public List<String> findRequirements(String dealerId) {
+		if(dr.findById(dealerId).isEmpty()) {
+			throw new ResourceNotFoundException("Dealer with "+dealerId+" not found");
+		}
 		Dealer dealer = dr.findById(dealerId).get();
 		List<String> required = dealer.getRequirements();
 		List<String> availableCrops = new ArrayList<>();
@@ -197,11 +233,20 @@ public class DealerServiceImpl implements DealerService {
 			
 		}
 		// TODO Auto-generated method stub
-		return availableCrops;
+		Set<String> tempSet = new HashSet<>();
+		List<String> avail = new ArrayList<>();
+		tempSet.addAll(availableCrops);
+		avail.addAll(tempSet);
+		
+		
+		return avail;
 	}
 
 	@Override
 	public Dealer deleteDealerById(String id) {
+		if(dr.findById(id).isEmpty()) {
+			throw new ResourceNotFoundException("Dealer with "+id+" not found");
+		}
 		// TODO Auto-generated method stub
 		Dealer dealer = dr.findById(id).get();
 		dr.deleteById(id);
@@ -210,6 +255,12 @@ public class DealerServiceImpl implements DealerService {
 
 	@Override
 	public String addMoneyToWallet(String id, long money) {
+		if(dr.findById(id).isEmpty()) {
+			throw new ResourceNotFoundException("Dealer with "+id+" not found");
+		}
+		else if(money <= 0) {
+			throw new InvalidTransaction("You cannot add negative amount");
+		}
 		// TODO Auto-generated method stub
 		Dealer d = dr.findById(id).get();
 		d.setAccountBalance(d.getAccountBalance()+money);

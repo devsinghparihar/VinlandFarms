@@ -31,7 +31,23 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Login user = this.load(username);
+		Login user = null;
+		try {
+			user = this.loadFarmer(username);
+		}
+		catch(Exception e) {}
+		try {
+			user = this.loadDealer(username);
+		}
+		catch(Exception e) {}
+		try {
+			user = this.loadAdmin(username);
+		}
+		catch(Exception e) {}
+		
+		
+//		Login user = this.load(username);
+		
 		if(user == null) {
 			throw new UsernameNotFoundException("User Not Found with email: "+username);
 		}
@@ -39,27 +55,49 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 		return UserDetailsImpl.getUser(user);
 	}
-	public Login load(String email) throws UsernameNotFoundException {
-		
-		if(farmerClient.findFarmerByEmail(email) != null) {
-			Farmer user = farmerClient.findFarmerByEmail(email);
-			Login  userModel = new Login 
-					(user.getEmail(), user.getPassword(), user.getRole(),user.getFarmerId());
-			return userModel;
-		}
-		else if(dealerClient.findDealerByEmail(email) != null) {
-			Dealer user = dealerClient.findDealerByEmail(email);
-			Login  userModel = new Login 
-					(user.getEmail(), user.getPassword(), user.getRole(),user.getDealerId());
-			return userModel;
-		}
-		else if(adminClient.findByEmail(email) != null) {
-			Admin user = adminClient.findByEmail(email);
-			Login userModel = new Login 
-					(user.getEmail(), user.getPassword(), user.getRole(),user.getAdminId());
-			return userModel;
-		}
-		return null;
+	
+	
+	
+	
+//	public Login load(String email) throws UsernameNotFoundException {
+//		
+//		if(farmerClient.findFarmerByEmail(email) != null) {
+//			Farmer user = farmerClient.findFarmerByEmail(email);
+//			Login  userModel = new Login 
+//					(user.getEmail(), user.getPassword(), user.getRole(),user.getFarmerId());
+//			return userModel;
+//		}
+//		else if(dealerClient.findDealerByEmail(email) != null) {
+//			Dealer user = dealerClient.findDealerByEmail(email);
+//			Login  userModel = new Login 
+//					(user.getEmail(), user.getPassword(), user.getRole(),user.getDealerId());
+//			return userModel;
+//		}
+//		else if(adminClient.findByEmail(email) != null) {
+//			Admin user = adminClient.findByEmail(email);
+//			Login userModel = new Login 
+//					(user.getEmail(), user.getPassword(), user.getRole(),user.getAdminId());
+//			return userModel;
+//		}
+//		return null;
+//	}
+	public Login loadFarmer(String email) {
+		Farmer user = farmerClient.findFarmerByEmail(email);
+		Login  userModel = new Login 
+				(user.getEmail(), user.getPassword(), user.getRole(),user.getFarmerId());
+		return userModel;
 	}
-
+	public Login loadDealer(String email) {
+		Dealer user = dealerClient.findDealerByEmail(email);
+		Login  userModel = new Login 
+				(user.getEmail(), user.getPassword(), user.getRole(),user.getDealerId());
+		return userModel;
+	}
+	public Login loadAdmin(String email) {
+		Admin user = adminClient.findByEmail(email);
+		Login userModel = new Login 
+				(user.getEmail(), user.getPassword(), user.getRole(),user.getAdminId());
+		return userModel;
+	}
+	
 }

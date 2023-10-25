@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class FarmerException extends RuntimeException {
-	
-	public FarmerException(String msg)
-	{
+public class NoCropsFoundException extends RuntimeException {
+
+	public NoCropsFoundException(String msg) {
 		super(msg);
 	}
-
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dealer.clients.FarmerClient;
 import com.dealer.dtos.CropDetailDTO;
 import com.dealer.dtos.UpdateDetailDTO;
+import com.dealer.exceptions.ResourceNotFoundException;
 import com.dealer.model.Dealer;
 import com.dealer.model.Transaction;
 import com.dealer.service.DealerServiceImpl;
@@ -69,7 +70,7 @@ public class DealerController {
 		return new ResponseEntity<List<CropDetailDTO>>(farmerClient.getAllCrops(),HttpStatus.OK);
 	}
 	@GetMapping("/searchCropsByType/{type}")
-	public ResponseEntity<List<CropDetailDTO>> getCropsByType(@PathVariable String type){
+	public ResponseEntity<List<CropDetailDTO>> getCropsByType(@PathVariable String type) throws ResourceNotFoundException {
 		return new ResponseEntity<List<CropDetailDTO>>(farmerClient.getCropsByType(type),HttpStatus.OK);
 	}
 	
