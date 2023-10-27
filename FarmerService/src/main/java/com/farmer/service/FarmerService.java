@@ -28,6 +28,7 @@ public interface FarmerService {
 	List<CropDetailDTO> getCropsByCropType(String cropType) throws NoCropsFoundException;
 	List<Transaction> findTransactionsByFarmerId(String id) throws NoTransactionFoundException;
 	String changePassword(String email, String newPassword) throws FarmerNotFoundException;
+	String updateRating(String farmerId, int rating) throws FarmerNotFoundException;;
 	
 	
 }

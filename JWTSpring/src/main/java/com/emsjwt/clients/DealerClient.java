@@ -57,6 +57,8 @@ public interface DealerClient {
 	public List<Transaction> getDealerHistory(@PathVariable String id);
 	@GetMapping("/findRequirements/{id}")
 	public List<String> findRequirements(@PathVariable String id);
+	@GetMapping("/updateFarmerRating/{farmerId}/{rating}")
+	public String updateFarmerRating(@PathVariable String farmerId, @PathVariable int rating);
 	
 
 }

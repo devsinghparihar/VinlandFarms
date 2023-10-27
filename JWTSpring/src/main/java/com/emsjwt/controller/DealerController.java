@@ -111,4 +111,8 @@ public class DealerController {
 	public ResponseEntity<Dealer> deleteDealerById(@PathVariable String id){
 		return new ResponseEntity<Dealer>(dealerClient.deleteDealerById(id),HttpStatus.OK);
 	}
+    @GetMapping("/updateFarmerRating/{farmerId}/{rating}")
+	public ResponseEntity<String> updateFarmerRating(@PathVariable String farmerId, @PathVariable int rating){
+		return new ResponseEntity<String>(dealerClient.updateFarmerRating(farmerId,rating),HttpStatus.OK);
+	}
 }

@@ -46,18 +46,45 @@
   }
   
   .paymentBtn {
-    background-color: #666;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    
+    display: inline-block;
+    outline: 0;
+    border: 0;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-    transition: background-color 0.3s;
+    font-weight: 600;
+    color: #fff;
+    font-size: 14px;
+    height: 38px;
+    padding: 8px 24px;
+    border-radius: 50px;
+    background-image: linear-gradient(180deg,#7c8aff,#3c4fe0);
+    box-shadow: 0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%);
+    transition: all .2s ease-out;
+    margin-bottom: 2px;
+    :hover{
+        box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
+    }
+    
   }
   
   .paymentBtn:hover {
     background-color: #444;
   }
-  
+  /* PaymentPage.css */
+/* ... (previous styles) ... */
+
+.star-rating {
+  display: flex;
+}
+
+.star {
+  font-size: 30px;
+  color: #ddd; /* Default star color (gray) */
+  cursor: pointer;
+}
+
+.star.active {
+  color: gold; /* Golden star color for active stars */
+}
+
+/* ... (previous styles) ... */

@@ -86,5 +86,9 @@ public class FarmerController {
 	public ResponseEntity<String> changePassword(@PathVariable String email, @PathVariable String password){
 		return new ResponseEntity<String>(farmerService.changePassword(email, password),HttpStatus.OK);
 	}
+	@GetMapping("/updateRating/{farmerId}/{rating}")
+	public ResponseEntity<String> updateRating(@PathVariable String farmerId, @PathVariable int rating){
+		return new ResponseEntity<String>(farmerService.updateRating(farmerId,rating),HttpStatus.OK);
+	}
 
 }

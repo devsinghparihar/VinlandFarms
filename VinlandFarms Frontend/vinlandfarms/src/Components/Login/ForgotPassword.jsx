@@ -10,9 +10,9 @@ function ForgotPassword() {
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
-  const handleSendOtp = async () => {
+  const handleSendOtp = () => {
     try {
-      await axios.get(`http://localhost:5006/public/sendOTP/${email}`);
+       axios.get(`http://localhost:5006/public/sendOTP/${email}`);
       setIsOtpSent(true);
     } catch (error) {
       // Handle error, e.g., show an error message

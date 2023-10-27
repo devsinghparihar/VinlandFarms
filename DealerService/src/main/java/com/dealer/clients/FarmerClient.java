@@ -29,5 +29,7 @@ public interface FarmerClient {
 	
 	@PutMapping("/updateFarmer")
 	public Farmer updateFarmer(@RequestBody Farmer farmer );
+	@GetMapping("/updateRating/{farmerId}/{rating}")
+	public String updateRating(@PathVariable String farmerId, @PathVariable int rating);
 	
 }

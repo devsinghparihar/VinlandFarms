@@ -55,6 +55,7 @@ public class FarmerServiceImpl implements FarmerService {
 				+ "Best regards,\r\n"
 				+ "The Vinland Farms Team");
 		emailClient.sendMail(email);  //log email sent or not 
+		f.setRating(0);
 		return fr.save(f);
 		// TODO Auto-generated method stub
 		
@@ -196,6 +197,18 @@ public class FarmerServiceImpl implements FarmerService {
 		farmer.setPassword(newPassword);
 		fr.save(farmer);
 		return "Password changed Successfully";
+	}
+
+	@Override
+	public String updateRating(String farmerId, int rating) throws FarmerNotFoundException {
+		// TODO Auto-generated method stub
+		if(fr.findById(farmerId).isEmpty()) {
+			throw new FarmerNotFoundException("Farmer with id "+farmerId+" does not exist");
+		}
+		Farmer farmer = fr.findById(farmerId).get();
+		farmer.setRating((int)(farmer.getRating()+rating)/2);
+		fr.save(farmer);
+		return "Rating Updated";
 	}
 
 	

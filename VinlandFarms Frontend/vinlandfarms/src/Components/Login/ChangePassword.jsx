@@ -20,9 +20,9 @@ function ChangePassword() {
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
 
-  const handleSendOtp = async () => {
+  const handleSendOtp =  () => {
     try {
-      await axios.get(`http://localhost:5006/public/sendOTP/${email}`);
+       axios.get(`http://localhost:5006/public/sendOTP/${email}`);
       console.log("clicked")
       setIsOtpSent(true);
     } catch (error) {
@@ -46,7 +46,7 @@ function ChangePassword() {
     };
 
     try {
-      const response = await axios.post('http://localhost:5006/public/changeFarmerPassword', formData);
+      const response = await axios.post('http://localhost:4865/public/changeFarmerPassword', formData);
 
       console.log(response);
       setRes(response.data);
@@ -87,27 +87,27 @@ function ChangePassword() {
 
                 />
 
-                <label htmlFor="otp">OTP</label>
+                
                 <input
                   type="text"
                   id="otp"
                   name="otp"
-                  placeholder="OTP"
+                  placeholder="Enter OTP"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   required
                   className="text-field"
 
                 />
-                <label htmlFor="password">New Password</label>
+                
                 <input
                   type="password"
-                  placeholder="New Password"
+                  placeholder="Enter New Password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   className="password-field"
                 />
-                <label htmlFor="confirmPassword">Confirm password</label>
+                
                 <input
                   type="password"
                   placeholder="Confirm New Password"
@@ -135,8 +135,9 @@ function ChangePassword() {
                 className="text-field"
                 
               />  
+               <button onClick={handleSendOtp}>Send OTP </button>
             </div>
-            <button onClick={handleSendOtp}>Send OTP </button>
+           
             
           </form>
         </div>

@@ -25,6 +25,7 @@ public interface DealerService {
 	List<Transaction> findTransactionsByDealerId(String id) throws ResourceNotFoundException;
 	boolean runScan(String dealerId) throws ResourceNotFoundException;
 	List<String> findRequirements(String dealerId) throws ResourceNotFoundException;
+	String updateFarmerRating(String farmerId, int rating) throws ResourceNotFoundException;
 	
 
 }

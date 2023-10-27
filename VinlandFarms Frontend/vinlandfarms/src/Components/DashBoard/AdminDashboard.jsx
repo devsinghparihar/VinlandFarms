@@ -40,7 +40,7 @@ function AdminDashboard() {
             <div className="card-body">
               <h2 className="card-title">Transaction History</h2>
               <p className="card-text">View your past transactions and earnings.</p>
-              <Link to="/transaction-history" className="btn btn-primary">View History</Link>
+              <Link to="/allTransactions" className="btn btn-primary">View History</Link>
             </div>
           </div>
         </div>

@@ -89,6 +89,11 @@ function Navbar() {
         // Redirect to the login page
         history.push('/login');
     };
+    const dealerHome = () => {
+    
+        // Redirect to the login page
+        history.push('/dealerDashBoard');
+    };
     const handleBack = () => {
         console.log(location)
         if (location.pathname == '/login') {
@@ -191,7 +196,7 @@ function Navbar() {
                                         </div>
                                     </div>
                                 )}
-                                <button>Dealer Button 3</button>
+                                <button onClick={dealerHome}>Home</button>
                             </div>
                         )}
                     </div>

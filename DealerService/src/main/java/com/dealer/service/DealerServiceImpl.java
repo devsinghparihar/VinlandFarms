@@ -273,6 +273,14 @@ public class DealerServiceImpl implements DealerService {
 		dr.save(d);
 		return "Balance updated, current balance: "+d.getAccountBalance();
 	}
+
+	@Override
+	public String updateFarmerRating(String farmerId, int rating) throws ResourceNotFoundException {
+		// TODO Auto-generated method stub
+		
+		return farmerClient.updateRating(farmerId, rating);
+	}
+	
 	
 	
 

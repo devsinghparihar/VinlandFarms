@@ -8,6 +8,7 @@ import './PaymentPage.css'; // Import the CSS file for styling
 function PaymentPage({ location, history }) {
   const paymentData = location.state.paymentData;
   const token = useSelector(state => state.auth.token);
+  
 
   if (!paymentData) {
     return (
@@ -96,8 +97,11 @@ function openTransactionModal(response)
       );
 
       console.log(response.data);
-
-      history.push('/paymentConfirm');
+      const farmerData = {
+        farmerId,
+        
+      };
+      history.push('/paymentConfirm',{farmerData});
     } catch (error) {
       console.log(error);
     }
