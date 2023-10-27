@@ -22,6 +22,10 @@ import DealerPanel from './Components/AdminComponents/DealerPanel';
 import UpdateDealer from './Components/AdminComponents/UpdateDealer';
 import Navbar from './Components/navbar/Navbar';
 import PrivateRoute from './PrivateRoute'; // Import the PrivateRoute component
+import ForgotPassword from './Components/Login/ForgotPassword';
+import ChangePassword from './Components/Login/ChangePassword';
+import PaymentPage from './Components/DealerComponents/PaymentPage';
+import PaymentConfirm from './Components/DealerComponents/PaymentConfirm';
 
 function App() {
   return (
@@ -32,12 +36,16 @@ function App() {
           <Switch>
           <Route exact path="/" component={LoginForm} />
             <Route path="/login" component={LoginForm} />
+            <Route  path='/forgotPassword' component={ChangePassword}></Route>
             <Route path="/farmer-registration" component={FarmerRegistration} />
             <Route path="/dealer-registration" component={DealerRegistration} />
             <Route path="/admin-registration"  component={AdminRegistration} />
+            {/* <Route path="/paymentConfirm"  component={PaymentConfirm} /> */}
             <PrivateRoute path="/AdminDashboard" role="ROLE_ADMIN" component={AdminDashboard} />
             <PrivateRoute path="/FarmerDashboard" role="ROLE_FARMER" component={FarmerDashboard} />
             <PrivateRoute path="/DealerDashboard" role="ROLE_DEALER" component={DealerDashboard} />
+            <PrivateRoute path="/payment" role="ROLE_DEALER" component={PaymentPage} />
+            <PrivateRoute path="/paymentConfirm" role="ROLE_DEALER" component={PaymentConfirm} />
             <PrivateRoute path="/addCrop" role="ROLE_FARMER" component={AddCropForm} />
             <PrivateRoute path="/buyCrop" role="ROLE_DEALER" component={BuyCrops} />
             <PrivateRoute path="/allTransactions" role="ROLE_ADMIN" component={TransactionList} />

@@ -12,6 +12,7 @@ function Navbar() {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const role = useSelector((state) => state.auth.role);
+    const email = useSelector((state) => state.auth.username);
     const id = useSelector((state) => state.auth.id);
     const token = useSelector((state) => state.auth.token);
     const location = useLocation();
@@ -31,8 +32,9 @@ function Navbar() {
     const handleAddMoney = async (e) => {
         e.preventDefault();
         try {
-            console.log(amount, id, generateConfig(token)) ;
-            const response = await axios.put(`http://localhost:4865/dealer/addMoneyToWallet/${id}/${amount}`,generateConfig(token));
+            
+
+            const response = await  axios.put(`http://localhost:4865/dealer/addMoneyToWallet/${id}/${amount}`,null,generateConfig(token));
             alert(response.data);
 
         } catch (error) {
@@ -42,6 +44,38 @@ function Navbar() {
         closeModal();
     };
     //add money complete
+
+    //add requirement
+    const [showReqModal, setShowReqModal] = useState(false);
+    const [req, setReq] = useState('');
+
+    const openReqModal = () => {
+        setShowReqModal(true);
+    };
+
+    const closeReqModal = () => {
+        setShowReqModal(false);
+    };
+
+    const handleAddReq = async (e) => {
+        e.preventDefault();
+        try {
+            const header = generateConfig(token)
+            console.log(amount, id, header, "sds") ;
+
+            const response = await axios.post(`http://localhost:4865/dealer/addRequirement/${req}/${email}`,null,generateConfig(token));
+            alert(req + " requirement added successfully to wishlist");
+
+        } catch (error) {
+            console.log(error);
+        }
+
+        closeModal();
+    };
+    
+
+
+    //add req complete 
 
     const handleLogout = () => {
         // Dispatch the logout action to clear the Redux store
@@ -124,32 +158,32 @@ function Navbar() {
 
                                 {/* modal */}
 
-                                <button>Add Requirement</button>
+                                <button onClick={openReqModal}>Add Requirement</button>
                                 {/* modal */}
-                                {showModal && (
+                                {showReqModal && (
                                     <div className="modal" role="dialog" style={{ display: 'block' }}>
                                         <div className="modal-dialog" role="document">
                                             <div className="modal-content">
                                                 <div className="modal-header">
-                                                    <h5 className="modal-title">Add Money</h5>
-                                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                    <h5 className="modal-title">Add Crop Requirement</h5>
+                                                    <button type="button" onClick={closeReqModal} className="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form onSubmit={handleAddMoney}>
+                                                <form onSubmit={handleAddReq}>
                                                     <div className="form-group" id='modalForm'>
 
                                                         <input
                                                             type="text"
-                                                            placeholder='Enter Amount'
+                                                            placeholder='Enter Crop Requirement'
                                                             id='modalInput'
-                                                            value={amount}
-                                                            onChange={(e) => setAmount(e.target.value)}
+                                                            value={req}
+                                                            onChange={(e) => setReq(e.target.value)}
                                                         />
                                                     </div>
                                                     <div className="modal-footer">
-                                                        <button type="submit" className="btn btn-primary">Add Money</button>
-                                                        <button type="button" onClick={closeModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" className="btn btn-primary">Add Req</button>
+                                                        <button type="button" onClick={closeReqModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     </div>
                                                 </form>
 

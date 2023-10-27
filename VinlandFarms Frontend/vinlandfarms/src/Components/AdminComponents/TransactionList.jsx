@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './TransactionList.css'; // Import your CSS file for styling
+import { useSelector } from 'react-redux';
+import generateConfig from '../AuthConfig/AuthHeader';
 
 function TransactionList() {
   const [transactions, setTransactions] = useState([]);
-
+  const token = useSelector(state=> state.auth.token);
+  const authHeader = generateConfig(token);
   useEffect(() => {
     // Fetch transactions from your API
-    axios.get('http://localhost:5003/admin/getAllTransactions')
+    axios.get('http://localhost:4865/admin/getAllTransactions',authHeader)
       .then((response) => {
         setTransactions(response.data);
       })

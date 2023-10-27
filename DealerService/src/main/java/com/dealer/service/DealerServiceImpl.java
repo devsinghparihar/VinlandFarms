@@ -46,6 +46,7 @@ public class DealerServiceImpl implements DealerService {
 		if(dr.findByEmail(d.getEmail()) !=null ) {
 			throw new EmailAlreadyExists("User with email"+d.getEmail()+" already exists");
 		}
+		d.setAccountBalance((long) 0);
 		EmailModel email = new EmailModel();
 		email.setTo(d.getEmail());
 		email.setSubject("Welcome to Vinland Farms");
@@ -224,8 +225,13 @@ public class DealerServiceImpl implements DealerService {
 		Dealer dealer = dr.findById(dealerId).get();
 		List<String> required = dealer.getRequirements();
 		List<String> availableCrops = new ArrayList<>();
+		List<CropDetailDTO> crop = new ArrayList<>();
 		for(String cropType: required) {
-			List<CropDetailDTO> crop=  farmerClient.getCropsByType(cropType);
+			try {
+				crop=  farmerClient.getCropsByType(cropType);
+			}catch(Exception e) {
+				continue;
+			}
 			
 			for(CropDetailDTO cropsInDto: crop) {
 				availableCrops.add(cropsInDto.getCropType());

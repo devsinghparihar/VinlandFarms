@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.emsjwt.clients.AdminClient;
 import com.emsjwt.clients.DealerClient;
 import com.emsjwt.clients.FarmerClient;
+import com.emsjwt.dtos.ChangePasswordDTO;
 import com.emsjwt.jwt.JwtUtility;
 import com.emsjwt.model.Admin;
 import com.emsjwt.model.Dealer;
@@ -32,6 +34,7 @@ import com.emsjwt.repository.UserRepository;
 import com.emsjwt.request.LoginRequest;
 import com.emsjwt.response.JSONResponse;
 import com.emsjwt.service.UserDetailsImpl;
+import com.emsjwt.service.UserDetailsServiceImpl;
 
 import jakarta.validation.Valid;
 
@@ -53,6 +56,8 @@ public class AuthController {
 	DealerClient dealerClient;
 	@Autowired
 	AdminClient adminClient;
+	@Autowired
+	UserDetailsServiceImpl userService;
 	
 	@Autowired
 	PasswordEncoder encoder;
@@ -71,18 +76,7 @@ public class AuthController {
 						
 													
 	}
-//	@PostMapping("/register")
-//	public ResponseEntity<EmployeeModel> register(@Valid @RequestBody EmployeeModel login){
-////		Login user = new Login(login.getUsername(),login.getPassword(),"ROLE_USER");
-//		String password = encoder.encode(login.getPassword());
-//		login.setPassword(password);
-//		return new ResponseEntity<EmployeeModel>(employeeClient.addEmployee(login), HttpStatus.OK);
-//		
-//	}
-//	@GetMapping("/test")
-//	public String test() {
-//		return "Success";
-//	}
+
 	
 	@PostMapping("/registerFarmer")
     public ResponseEntity<Farmer> registerFarmer(@Valid @RequestBody Farmer farmer) {
@@ -105,5 +99,14 @@ public class AuthController {
         Admin addedAdmin = adminClient.addAdmin(admin);
         return ResponseEntity.ok(addedAdmin);
     }
+	@GetMapping("/sendOTP/{email}")
+	public ResponseEntity<String> sendOTP(@PathVariable String email){
+		return new ResponseEntity<String>(userService.sendOTP(email),HttpStatus.OK);
+	}
+	@PostMapping("/changeFarmerPassword")
+	public ResponseEntity<String> changeFarmerPassword(@Valid @RequestBody ChangePasswordDTO password){
+		password.setNewPassword(encoder.encode(password.getNewPassword()));
+		return new ResponseEntity<String>(userService.changePassword(password),HttpStatus.OK);
+	}
 
 }

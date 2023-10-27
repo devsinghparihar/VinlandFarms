@@ -82,5 +82,9 @@ public class FarmerController {
 	public ResponseEntity<Farmer> deleteFarmerById(@PathVariable String id){
 		return new ResponseEntity<Farmer>(farmerService.deleteFarmerById(id),HttpStatus.OK);
 	}
+	@GetMapping("/changePassword/{email}/{password}")
+	public ResponseEntity<String> changePassword(@PathVariable String email, @PathVariable String password){
+		return new ResponseEntity<String>(farmerService.changePassword(email, password),HttpStatus.OK);
+	}
 
 }

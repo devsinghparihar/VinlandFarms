@@ -21,7 +21,7 @@ function AdminRegistration() {
 
     try {
         
-        const response = await axios.post('http://localhost:5006/public/registerAdmin', formData);
+        const response = await axios.post('http://localhost:4865/public/registerAdmin', formData);
   
         console.log('Registration successful:', response.data);
         alert("Registration succcessfull... Check your email for confirmation\nRedirecting to login page");

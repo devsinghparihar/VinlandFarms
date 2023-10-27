@@ -1,6 +1,9 @@
 package com.emsjwt.service;
 
 
+import java.util.Optional;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,13 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.emsjwt.clients.AdminClient;
 import com.emsjwt.clients.DealerClient;
+import com.emsjwt.clients.EmailClient;
 import com.emsjwt.clients.FarmerClient;
+import com.emsjwt.dtos.ChangePasswordDTO;
 import com.emsjwt.model.Admin;
 import com.emsjwt.model.Dealer;
+import com.emsjwt.model.EmailModel;
 import com.emsjwt.model.Farmer;
 import com.emsjwt.model.Login;
-import com.emsjwt.model.UserModel;
-import com.emsjwt.repository.UserRepository;
+import com.emsjwt.model.SendOTP;
+import com.emsjwt.repository.OTPRepository;
+
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -27,6 +34,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	DealerClient dealerClient;
 	@Autowired
 	AdminClient adminClient;
+	@Autowired
+	EmailClient emailClient;
+	@Autowired
+	OTPRepository otpRepo;
 
 	@Override
 	@Transactional
@@ -59,28 +70,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	
 	
-//	public Login load(String email) throws UsernameNotFoundException {
-//		
-//		if(farmerClient.findFarmerByEmail(email) != null) {
-//			Farmer user = farmerClient.findFarmerByEmail(email);
-//			Login  userModel = new Login 
-//					(user.getEmail(), user.getPassword(), user.getRole(),user.getFarmerId());
-//			return userModel;
-//		}
-//		else if(dealerClient.findDealerByEmail(email) != null) {
-//			Dealer user = dealerClient.findDealerByEmail(email);
-//			Login  userModel = new Login 
-//					(user.getEmail(), user.getPassword(), user.getRole(),user.getDealerId());
-//			return userModel;
-//		}
-//		else if(adminClient.findByEmail(email) != null) {
-//			Admin user = adminClient.findByEmail(email);
-//			Login userModel = new Login 
-//					(user.getEmail(), user.getPassword(), user.getRole(),user.getAdminId());
-//			return userModel;
-//		}
-//		return null;
-//	}
+
 	public Login loadFarmer(String email) {
 		Farmer user = farmerClient.findFarmerByEmail(email);
 		Login  userModel = new Login 
@@ -98,6 +88,47 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Login userModel = new Login 
 				(user.getEmail(), user.getPassword(), user.getRole(),user.getAdminId());
 		return userModel;
+	}
+	
+	public String sendOTP(String userEmail) {
+		try {
+		Random random = new Random();
+        int otp = 100000 + random.nextInt(900000);
+        EmailModel email = new EmailModel();
+		email.setTo(userEmail);
+		email.setSubject("OTP to reset password: VinlandFarms");
+		email.setText("Dear User,\r\n"
+				+ "\r\n"
+				+ "OTP to reset password is : " +otp
+				+ "\r\n"
+				+ "Best regards,\r\n"
+				+ "The Vinland Farms Team");
+		emailClient.sendMail(email);
+		SendOTP sentOTP = new SendOTP();
+		sentOTP.setEmail(userEmail);
+		sentOTP.setOtp(otp);
+		otpRepo.save(sentOTP);
+		return "OTP sent to "+ userEmail;
+		}
+		catch (Exception e) {
+			System.out.println("Failed to send");
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return null;
+				
+	}
+	public String changePassword(ChangePasswordDTO changePasswordDTO) {
+			Optional<SendOTP> orignalOTP = otpRepo.findById(changePasswordDTO.getEmail());
+			if(orignalOTP.isEmpty()) {
+				return "Resend OTP and try again";
+			}
+			else if(orignalOTP.get().getOtp() != changePasswordDTO.getOtp()) {
+				return "OTP does not match try again";
+			}else {
+				otpRepo.delete(orignalOTP.get());
+				return farmerClient.changePassword(changePasswordDTO.getEmail(), changePasswordDTO.getNewPassword());
+			}
 	}
 	
 }

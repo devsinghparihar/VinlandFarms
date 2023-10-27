@@ -3,6 +3,7 @@ import '../FarmerComponents/ProfileDetails.css';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import generateConfig from '../AuthConfig/AuthHeader';
 
 const UpdateFarmer = () => {
   const [profileData, setProfileData] = useState(null);
@@ -12,6 +13,7 @@ const UpdateFarmer = () => {
   const email = location.pathname.split("/")[3];
   
   const jwtToken = useSelector((state) => state.auth.token);
+  const authHeader = generateConfig(jwtToken);
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -29,19 +31,13 @@ const UpdateFarmer = () => {
     e.preventDefault();
     try {
 
-      // const config = {
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     Authorization: `Bearer ${jwtToken}`,
-      //   },
-      // };
-      console.log(`http://localhost:5003/admin/updateFarmer/${email}`,formData)
+      console.log(`http://localhost:4865/admin/updateFarmer/${email}`,formData)
       const response = await axios.put(
-        `http://localhost:5003/admin/updateFarmer/${email}`,
-        formData
+        `http://localhost:4865/admin/updateFarmer/${email}`,
+        formData,authHeader
 
       );
-
+        alert("Farmer details with email "+email+" updated")
       console.log('Farmer details updated:', response.data);
     } catch (error) {
       console.error('Error updating farmer details:', error);
@@ -51,8 +47,8 @@ const UpdateFarmer = () => {
 
 
   useEffect(() => {
-    console.log(`http://localhost:5003/admin/findFarmerById/${id}`);
-    fetch(`http://localhost:5001/farmer/findFarmerById/${id}`)
+    console.log(`http://localhost:4865/admin/findFarmerById/${id}`,authHeader);
+    fetch(`http://localhost:4865/farmer/findFarmerById/${id}`,authHeader)
       .then((response) => response.json())
       .then((data) => setProfileData(data))
       .catch((error) => console.error('Error fetching data:', error));

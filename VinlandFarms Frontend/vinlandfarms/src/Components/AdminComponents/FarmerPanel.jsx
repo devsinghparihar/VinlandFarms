@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './FarmerPanel.css';
+import { useSelector } from 'react-redux';
+import generateConfig from '../AuthConfig/AuthHeader';
 
 const FarmerPanel = () => {
     const [farmers, setFarmers] = useState([]);
     const [viewActiveFarmers, setViewActiveFarmers] = useState(false);
     const [viewInactiveFarmers, setViewInactiveFarmers] = useState(false);
+    const token = useSelector(state=> state.auth.token);
+    const authHeader = generateConfig(token);
     const history = useHistory();
 
     useEffect(() => {
@@ -15,7 +19,7 @@ const FarmerPanel = () => {
     }, []);
 
     const fetchFarmers = () => {
-        axios.get('http://localhost:5001/farmer/getAll')
+        axios.get('http://localhost:4865/farmer/getAll',authHeader)
             .then((response) => {
                 setFarmers(response.data);
                 setViewActiveFarmers(false);
@@ -28,7 +32,7 @@ const FarmerPanel = () => {
 
     const handleViewActiveFarmers = () => {
         // Fetch the list of active farmers
-        axios.get('http://localhost:5003/admin/activeFarmers')
+        axios.get('http://localhost:4865/admin/activeFarmers',authHeader)
             .then((response) => {
                 setFarmers(response.data);
                 setViewActiveFarmers(true);
@@ -41,7 +45,7 @@ const FarmerPanel = () => {
 
     const handleViewInactiveFarmers = () => {
         // Fetch the list of inactive farmers
-        axios.get('http://localhost:5003/admin/inactiveFarmers')
+        axios.get('http://localhost:4865/admin/inactiveFarmers',authHeader)
             .then((response) => {
                 setFarmers(response.data);
                 setViewActiveFarmers(false);
@@ -51,9 +55,7 @@ const FarmerPanel = () => {
                 console.error('Error fetching inactive farmers:', error);
             });
     };
-    const handleShowMoreDetails = (farmerId) => {
-
-    }
+    
 
     const handleUpdateFarmer = (farmerId,email) => {
         // Redirect to a certain page with the farmerId as a path variable
@@ -63,9 +65,10 @@ const FarmerPanel = () => {
     const handleDeleteFarmer = (farmerId) => {
         // Make an API request to delete the farmer
         axios
-            .delete(`http://localhost:5001/farmer/deleteFarmerById/${farmerId}`)
+            .delete(`http://localhost:4865/admin/deleteFarmerById/${farmerId}`,authHeader)
             .then((response) => {
                 // If deletion is successful, remove the farmer tuple from the state
+                alert("Farmer Deleted")
                 setFarmers((farmers) => farmers.filter((farmer) => farmer.farmerId !== farmerId));
             })
             .catch((error) => {
@@ -75,7 +78,7 @@ const FarmerPanel = () => {
 
     useEffect(() => {
         // Fetch the list of all farmers
-        axios.get('http://localhost:5001/farmer/getAll')
+        axios.get('http://localhost:4865/farmer/getAll',authHeader)
             .then((response) => {
                 setFarmers(response.data);
             })

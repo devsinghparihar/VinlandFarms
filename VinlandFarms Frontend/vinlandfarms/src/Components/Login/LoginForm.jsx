@@ -53,7 +53,7 @@ function LoginForm() {
 
     try {
       // console.log(userEmail, userPassword);
-      const response = await axios.post('http://localhost:5006/public/signin', {
+      const response = await axios.post('http://localhost:4865/public/signin', {
         username: userEmail,
         password: userPassword,
       });
@@ -130,6 +130,7 @@ function LoginForm() {
             )}
           </div>
           <button type="button" onClick={handleLogin}>Login</button>
+          <p>Forgot Password ?  <Link to="/forgotPassword">Click Here</Link></p>
         </form>
       </div>
       

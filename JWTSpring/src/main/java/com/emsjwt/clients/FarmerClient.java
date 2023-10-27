@@ -42,5 +42,7 @@ public interface FarmerClient {
 	public List<CropDetailDTO> getCropsByType(@PathVariable String type);
 	@GetMapping("/farmerTransactionHistory/{id}")
 	public List<Transaction> getFarmerHistory(@PathVariable String id);
+	@GetMapping("/changePassword/{email}/{password}")
+	public String changePassword(@PathVariable String email, @PathVariable String password);
 
 }

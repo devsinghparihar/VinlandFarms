@@ -1,7 +1,9 @@
 package com.admin.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,12 +75,17 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<Dealer> getActiveDealers() {
-		List<Dealer> activeDealers = new ArrayList<>();
+		Set<Dealer> activeDealers = new HashSet<>();
 		for(Transaction t: transactionClient.getAllTransactions()) {
 			activeDealers.add(dealerClient.findFarmerById(t.getDealerId()));
 		}
+		
+		List<Dealer> avail = new ArrayList<>();
+		
+		avail.addAll(activeDealers);
+		
 		// TODO Auto-generated method stub
-		return activeDealers;
+		return avail;
 	}
 
 	@Override

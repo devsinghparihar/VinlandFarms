@@ -24,7 +24,7 @@ import com.emsjwt.model.Transaction;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/farmer")
-@PreAuthorize("hasRole('FARMER')")
+@PreAuthorize("hasAnyRole('FARMER','ADMIN')")
 public class FarmerController {
 
 	@Autowired
@@ -55,7 +55,7 @@ public class FarmerController {
         Farmer updatedFarmer = farmerClient.updateFarmer(farmer);
         return ResponseEntity.ok(updatedFarmer);
     }
-
+    
     @GetMapping("/getAll")
     public ResponseEntity<List<Farmer>> getAllFarmers() {
         List<Farmer> farmers = farmerClient.getAllFarmers();

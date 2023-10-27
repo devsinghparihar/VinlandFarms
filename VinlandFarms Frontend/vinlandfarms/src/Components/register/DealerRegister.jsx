@@ -29,7 +29,7 @@ function DealerRegistration() {
     try {
         
         
-        const response = await axios.post('http://localhost:5006/public/registerDealer', formData);
+        const response = await axios.post('http://localhost:4865/public/registerDealer', formData);
   
         console.log('Registration successful:', response.data);
         alert("Registration succcessfull... Check your email for confirmation\nRedirecting to login page");

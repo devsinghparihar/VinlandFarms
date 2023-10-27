@@ -27,7 +27,7 @@ function FarmerRegistration() {
     };
 
     try {
-      const response = await axios.post('http://localhost:5006/public/registerFarmer', formData);
+      const response = await axios.post('http://localhost:4865/public/registerFarmer', formData);
 
       console.log('Registration successful:', response.data);
       alert("Registration successful... Check your email for confirmation\nRedirecting to the login page");

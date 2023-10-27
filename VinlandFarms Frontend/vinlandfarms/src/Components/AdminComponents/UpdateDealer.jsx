@@ -3,6 +3,7 @@ import '../FarmerComponents/ProfileDetails.css'; // Make sure the CSS file name 
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import generateConfig from '../AuthConfig/AuthHeader';
 
 const UpdateDealer = () => {
     const [profileData, setProfileData] = useState(null);
@@ -10,6 +11,7 @@ const UpdateDealer = () => {
     const id = location.pathname.split("/")[2];
     const email = location.pathname.split("/")[3];
     const jwtToken = useSelector((state) => state.auth.token);
+    const authHeader = generateConfig(jwtToken);
     const [formData, setFormData] = useState({
         name: '',
         gender: '',
@@ -25,16 +27,10 @@ const UpdateDealer = () => {
         e.preventDefault();
         try {
 
-            // const config = {
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //     Authorization: `Bearer ${jwtToken}`,
-            //   },
-            // };
             console.log(formData)
             const response = await axios.put(
-                `http://localhost:5003/admin/updateDealer/${email}`,
-                formData
+                `http://localhost:4865/admin/updateDealer/${email}`,
+                formData,authHeader
 
             );
 
@@ -47,7 +43,7 @@ const UpdateDealer = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5002/dealer/findDealerById/${id}`)
+        fetch(`http://localhost:4865/dealer/findDealerById/${id}`,authHeader)
             .then((response) => response.json())
             .then((data) => setProfileData(data))
             .catch((error) => console.error('Error fetching data:', error));

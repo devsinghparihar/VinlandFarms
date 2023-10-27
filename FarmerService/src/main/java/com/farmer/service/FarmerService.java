@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.farmer.dtos.CropDetailDTO;
 import com.farmer.dtos.UpdateDetailDTO;
+
 import com.farmer.exceptions.EmailAlreadyExists;
 import com.farmer.exceptions.FarmerException;
 import com.farmer.exceptions.FarmerNotFoundException;
@@ -26,7 +27,7 @@ public interface FarmerService {
 	List<CropDetailDTO> getAllCrops();
 	List<CropDetailDTO> getCropsByCropType(String cropType) throws NoCropsFoundException;
 	List<Transaction> findTransactionsByFarmerId(String id) throws NoTransactionFoundException;
-	
+	String changePassword(String email, String newPassword) throws FarmerNotFoundException;
 	
 	
 }

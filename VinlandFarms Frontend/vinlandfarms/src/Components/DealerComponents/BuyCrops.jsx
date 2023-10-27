@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import './BuyCrops.css';
+import generateConfig from '../AuthConfig/AuthHeader';
 
 function BuyCrops() {
   const [cropList, setCropList] = useState([]);
   const [selectedCrop, setSelectedCrop] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const dealerId = useSelector(state => state.auth.id);
+  const token = useSelector(state => state.auth.token);
+  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     
-    axios.get('http://localhost:5002/dealer/searchAllCrops ')
+    axios.get('http://localhost:4865/dealer/searchAllCrops',generateConfig(token))
       .then((response) => {
         setCropList(response.data);
       })
@@ -20,26 +25,38 @@ function BuyCrops() {
       });
   }, []);
 
-  const handleBuyNow = () => {
+  const handleBuyNow = async () => {
     if (selectedCrop) {
-      // Extract information from the selected crop
       const { farmerId, cropType, cropPrice } = selectedCrop;
-      
-
-      // Calculate the estimated price
       const estimatedPrice = quantity * cropPrice;
+      const paymentData = {
+        farmerId,
+        dealerId,
+        cropType,
+        quantity,
+        cropPrice,
+        estimatedPrice
+      };
+
+      // Navigate to the payment page and pass paymentData as state
+      alert("Redirecting to payment page")
+      history.push('/payment', { paymentData });
+      // Extract information from the selected crop
+      // const { farmerId, cropType, cropPrice } = selectedCrop;
+      
+
+      // // Calculate the estimated price
+      // const estimatedPrice = quantity * cropPrice;
 
       
-      // http://localhost:5006/dealer/buyCrop/1/1/1/1'
-      axios.put(`http://localhost:5002/dealer/buyCrop/${farmerId}/${dealerId}/${cropType}/${quantity}`)
-        .then((response) => {
-         
-          console.log('Purchase successful:', response.data);
-        })
-        .catch((error) => {
-         
-          console.error('Error purchasing crop:', error);
-        });
+      // // http://localhost:5006/dealer/buyCrop/1/1/1/1'
+      // try{
+      //   console.log(generateConfig(token))
+      // const res =await axios.post(`http://localhost:4865/dealer/buyCrop/${farmerId}/${dealerId}/${cropType}/${quantity}`,null,generateConfig(token))
+      //  console.log(res.data); }
+      //  catch(error){
+      //   console.log(error)
+      //  }
     }
   };
 

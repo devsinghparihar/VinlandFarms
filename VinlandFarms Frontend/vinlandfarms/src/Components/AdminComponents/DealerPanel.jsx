@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './FarmerPanel.css';
+import { useSelector } from 'react-redux';
+import generateConfig from '../AuthConfig/AuthHeader';
 
 const DealerPanel = () => {
     const [dealers, setDealers] = useState([]);
     const [viewActiveDealers, setViewActiveDealers] = useState(false);
     const [viewInactiveDealers, setViewInactiveDealers] = useState(false);
     const history = useHistory();
+    const token = useSelector(state => state.auth.token);
+    const authHeader = generateConfig(token)
    
 
     useEffect(() => {
@@ -16,7 +20,7 @@ const DealerPanel = () => {
     }, []);
 
     const fetchDealers = () => {
-        axios.get('http://localhost:5002/dealer/getAllDealers')
+        axios.get('http://localhost:4865/dealer/getAllDealers',authHeader)
             .then((response) => {
                 setDealers(response.data);
                 setViewActiveDealers(false);
@@ -29,7 +33,7 @@ const DealerPanel = () => {
 
     const handleViewActiveDealers = () => {
         // Fetch the list of actDealersmers
-        axios.get('http://localhost:5003/admin/activeDealers')
+        axios.get('http://localhost:4865/admin/activeDealers',authHeader)
             .then((response) => {
                 setDealers(response.data);
                 setViewActiveDealers(true);
@@ -42,7 +46,7 @@ const DealerPanel = () => {
 
     const handleViewInactiveDealers = () => {
         // Fetch the list of inactive farmers
-        axios.get('http://localhost:5003/admin/inactiveDealers')
+        axios.get('http://localhost:4865/admin/inactiveDealers',authHeader)
             .then((response) => {
                 setDealers(response.data);
                 setViewActiveDealers(false);
@@ -62,10 +66,11 @@ const DealerPanel = () => {
     const handleDeleteDealer = (dealerId) => {
         // Make an API request to delete the farmer
         axios
-            .delete(`http://localhost:5003/admin/deleteDealerById/${dealerId}`)
+            .delete(`http://localhost:4865/dealer/deleteDealerById/${dealerId}`,authHeader)
             .then((response) => {
                 // If deletion is successful, remove the farmer tuple from the state
                 setDealers((dealer) => dealer.filter((dealer) => dealer.dealerId !== dealerId));
+                alert("Deleted Deleted")
             })
             .catch((error) => {
                 console.error('Error deleting Dealer:', error);
@@ -74,7 +79,7 @@ const DealerPanel = () => {
 
     useEffect(() => {
         // Fetch the list of all farmers
-        axios.get('http://localhost:5002/dealer/getAllDealers')
+        axios.get('http://localhost:4865/dealer/getAllDealers',authHeader)
             .then((response) => {
                 setDealers(response.data);
             })

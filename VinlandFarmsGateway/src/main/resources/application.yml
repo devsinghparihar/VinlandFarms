@@ -1,18 +1,4 @@
-#server:
-#  port: 4865
-#
-#spring:
-#  application:
-#    name: api-gateway
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: Security-service
-#          uri: http://localhost:5006
-#          predicates:
-#            - Path=/**
-
-            
+         
 server:
   port: 4865
  
@@ -36,7 +22,7 @@ spring:
            allowedHeaders: "*"
       routes:
       - id: user-service
-        uri: lb://Security-service
+        uri: http://localhost:5006
         predicates:
           - Path=/**
        

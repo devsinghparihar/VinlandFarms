@@ -1,0 +1,63 @@
+/* PaymentPage.css */
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f3f3;
+  }
+  
+  .payment-content {
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .payment-details {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .payment-content img {
+    max-width: 275px;
+    height: auto;
+    margin-right: -10px;
+  }
+  
+  .payment-details h2 {
+    color: #333;
+  }
+  
+  .payment-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  strong {
+    font-weight: bold;
+    color: #444;
+  }
+  
+  .paymentBtn {
+    background-color: #666;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .paymentBtn:hover {
+    background-color: #444;
+  }
+  

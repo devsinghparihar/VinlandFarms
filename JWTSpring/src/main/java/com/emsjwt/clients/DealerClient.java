@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,6 +44,9 @@ public interface DealerClient {
 	public Dealer findDealerrById(@PathVariable String Id);
 	@GetMapping("/findDealerByEmail/{email}")
 	public Dealer findDealerByEmail(@PathVariable String email);
+	
+	@DeleteMapping("/deleteDealerById/{id}")
+	public Dealer deleteDealerById(@PathVariable String id);
 	
 //	initiate transaction
 	@PutMapping("/buyCrop/{farmerId}/{dealerId}/{cropType}/{quantity}")

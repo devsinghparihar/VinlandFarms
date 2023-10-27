@@ -186,6 +186,19 @@ public class FarmerServiceImpl implements FarmerService {
 		return farmer;
 	}
 
+	@Override
+	public String changePassword(String email, String newPassword) throws FarmerNotFoundException {
+		// TODO Auto-generated method stub
+		if(fr.findByEmail(email) == null) {
+			throw new FarmerNotFoundException("No Farmer with email "+email+" found");
+		}
+		Farmer farmer = fr.findByEmail(email);
+		farmer.setPassword(newPassword);
+		fr.save(farmer);
+		return "Password changed Successfully";
+	}
+
+	
 	
 
 	

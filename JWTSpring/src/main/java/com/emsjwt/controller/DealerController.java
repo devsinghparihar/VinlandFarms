@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,7 @@ import com.emsjwt.model.Transaction;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/dealer")
-@PreAuthorize("hasRole('DEALER')")
+@PreAuthorize("hasAnyRole('DEALER','ADMIN')")
 public class DealerController {
 	
 	@Autowired
@@ -106,4 +107,8 @@ public class DealerController {
         List<String> requirements = dealerClient.findRequirements(id);
         return ResponseEntity.ok(requirements);
     }
+    @DeleteMapping("/deleteDealerById/{id}")
+	public ResponseEntity<Dealer> deleteDealerById(@PathVariable String id){
+		return new ResponseEntity<Dealer>(dealerClient.deleteDealerById(id),HttpStatus.OK);
+	}
 }
