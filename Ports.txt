@@ -17,13 +17,10 @@ Optionals
 Throwing exceptions 
 circuit breaker
 Exception response JSON
-fallback
+
 
 functionality
-Subscribe crop 
-generate report
-add requirement
-Update admin farmer dealer , encode decode password
-update farmer dealer through admin encode decode password
+
+
 Delete unnecessary models, controller repo dto from security MS
 
