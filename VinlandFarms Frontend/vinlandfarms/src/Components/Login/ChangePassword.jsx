@@ -31,7 +31,8 @@ function ChangePassword() {
     }
   };
 
-  const handleChangePassword = async () => {
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
     // Perform frontend validation, e.g., check if passwords match
     if (newPassword !== confirmNewPassword) {
       // Handle password mismatch error
@@ -46,6 +47,7 @@ function ChangePassword() {
     };
 
     try {
+      console.log(formData);
       const response = await axios.post('http://localhost:4865/public/changeFarmerPassword', formData);
 
       console.log(response);

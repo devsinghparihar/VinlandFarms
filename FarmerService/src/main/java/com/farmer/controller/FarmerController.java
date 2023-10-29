@@ -22,6 +22,8 @@ import com.farmer.model.Farmer;
 import com.farmer.model.Transaction;
 import com.farmer.service.FarmerServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/farmer")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -31,7 +33,7 @@ public class FarmerController {
 	FarmerServiceImpl farmerService;
 	
 	@PostMapping("/register")
-	public ResponseEntity<Farmer> registerFarmer(@RequestBody Farmer farmer){
+	public ResponseEntity<Farmer> registerFarmer(@Valid @RequestBody Farmer farmer){
 		return new ResponseEntity<Farmer>(farmerService.addFarmer(farmer), HttpStatus.OK); 
 		
 	}
