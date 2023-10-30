@@ -1,33 +1,47 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Carousel from '../Carousel/carousel';
+import AboutUs from '../StaticPages/AboutUs';
+import './Dashboard.css';
+import Home from '../StaticPages/Home';
 function AdminDashboard() {
     const role = useSelector(state => state.auth.role);
     const token = useSelector(state => state.auth.token);
     const email = useSelector(state => state.auth.username);
-  return (
-    <div className="container">
-      <h1 className="mt-4">Welcome Dealer</h1>
+    const adminTagline = 'Admin Panel for Efficient Management.';
+    const adminPara = 'Managing and overseeing the farming community. Keep everything organized and efficient with our admin tools.';
+    const imgSrc = '/images/adminBackground.gif';
 
+  return (
+    <>
+    <h1 className="text-center">Welcome To Vinland Farms </h1>
+      <Carousel></Carousel>
+      <div className="container">
+      <Home tagline={adminTagline} para={adminPara} imgSrc={imgSrc} />
+      </div>
+      
+    <div className="container">
+      
       <div className="row">
         <div className="col-md-4 mb-4">
           <div className="card">
-            <img src="/images/farmer4.jpg" className="card-img-top" alt="Add Crop" />
+            <img src="https://i.pinimg.com/originals/50/78/a0/5078a05eb1b6847d93383eaa4c0ed500.gif" className="card-img-top" alt="Add Crop" />
             <div className="card-body">
               <h2 className="card-title">Farmer Management</h2>
               <p className="card-text">Manage Farmers.</p>
-              <Link to="/farmerPanel" className="btn btn-primary">View</Link>
+              <Link to="/farmerPanel" className="dashboardBtn">View</Link>
             </div>
           </div>
         </div>
 
         <div className="col-md-4 mb-4">
           <div className="card">
-            <img src="/images/farmer3.jpg" className="card-img-top" alt="Add Crop" />
+            <img src="https://media.swipepages.com/2020/12/animation_500_kjb5357c-min.gif" className="card-img-top" alt="Add Crop" />
             <div className="card-body">
               <h2 className="card-title">Dealer Management</h2>
               <p className="card-text">Manage dealers.</p>
-              <Link to="/dealerPanel" className="btn btn-primary">View</Link>
+              <Link to="/dealerPanel" className="dashboardBtn">View</Link>
             </div>
           </div>
         </div>
@@ -36,71 +50,22 @@ function AdminDashboard() {
 
         <div className="col-md-4 mb-4">
           <div className="card">
-            <img src="/images/farmer2.jpg" className="card-img-top" alt="Transaction History" />
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/141a2594777445.5e87284ae2666.gif" className="card-img-top" alt="Transaction History" />
             <div className="card-body">
               <h2 className="card-title">Transaction History</h2>
-              <p className="card-text">View your past transactions and earnings.</p>
-              <Link to="/allTransactions" className="btn btn-primary">View History</Link>
+              <p className="card-text">View All transactions.</p>
+              
+              <Link to="/allTransactions" className="dashboardBtn text-center">View </Link>
             </div>
           </div>
         </div>
 
-        <div className="col-md-4 mb-4">
-          <div className="card">
-            <img src="/images/farmer1.jpg" className="card-img-top" alt="Add Crop" />
-            <div className="card-body">
-              <h2 className="card-title">View Active Farmers</h2>
-              <p className="card-text">View all Active farmers.</p>
-              <Link to="/buyCrop" className="btn btn-primary">View</Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-4 mb-4">
-          <div className="card">
-            <img src="/images/farmer4.jpg" className="card-img-top" alt="Add Crop" />
-            <div className="card-body">
-              <h2 className="card-title">View Inactive Farmers</h2>
-              <p className="card-text">View all Inactive farmers.</p>
-              <Link to="/inActiveFarmers" className="btn btn-primary">View</Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-4 mb-4">
-          <div className="card">
-            <img src="/images/farmer3.jpg" className="card-img-top" alt="Add Crop" />
-            <div className="card-body">
-              <h2 className="card-title">View Active Dealers</h2>
-              <p className="card-text">View all Active dealers.</p>
-              <Link to="/buyCrop" className="btn btn-primary">View</Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-4 mb-4">
-          <div className="card">
-            <img src="/images/farmer2.jpg" className="card-img-top" alt="Add Crop" />
-            <div className="card-body">
-              <h2 className="card-title">View Inactive dealers</h2>
-              <p className="card-text">View all Inactive dealers.</p>
-              <Link to="/buyCrop" className="btn btn-primary">View</Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-4 mb-4">
-          <div className="card">
-            <img src="/images/farmer1.jpg" className="card-img-top" alt="Update Profile" />
-            <div className="card-body">
-              <h2 className="card-title">Update Profile</h2>
-              <p className="card-text">Edit your profile details and preferences.</p>
-              <Link to="/updateFarmerDetails" className="btn btn-primary">Update Profile</Link>
-            </div>
-          </div>
-        </div>
+      
       </div>
+      
     </div>
+    
+    </>
   );
 }
 

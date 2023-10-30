@@ -68,7 +68,7 @@ function BuyCrops() {
           {cropList.map((crop) => (
             <div key={crop.farmerId + crop.cropType} className="crop-card" onClick={() => setSelectedCrop(crop)}>
               <div className="crop-image">
-                <img src="/images/crop.jpg" alt={crop.cropType} />
+                <img src="/images/fruitBasket.jpg" alt={crop.cropType} />
               </div>
               <div className="crop-details">
                 <div>

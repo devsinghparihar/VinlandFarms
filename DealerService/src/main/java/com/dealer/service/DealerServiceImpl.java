@@ -280,6 +280,19 @@ public class DealerServiceImpl implements DealerService {
 		
 		return farmerClient.updateRating(farmerId, rating);
 	}
+
+	@Override
+	public String changePassword(String email, String newPassword) throws ResourceNotFoundException {
+		// TODO Auto-generated method stub
+		if(dr.findByEmail(email) == null) {
+			throw new ResourceNotFoundException("No Dealer with email "+email+" found");
+		}
+		Dealer dealer = dr.findByEmail(email);
+		dealer.setPassword(newPassword);
+		dr.save(dealer);
+		return "Password changed Successfully";
+	}
+	
 	
 	
 	

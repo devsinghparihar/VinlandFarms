@@ -18,11 +18,12 @@ function ChangePassword() {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
+  const [userType, setUserType] = useState('Farmer');
 
 
-  const handleSendOtp =  () => {
+  const handleSendOtp = () => {
     try {
-       axios.get(`http://localhost:5006/public/sendOTP/${email}`);
+      axios.get(`http://localhost:5006/public/sendOTP/${email}`);
       console.log("clicked")
       setIsOtpSent(true);
     } catch (error) {
@@ -44,11 +45,12 @@ function ChangePassword() {
       email,
       otp,
       newPassword,
+      userType,
     };
 
     try {
       console.log(formData);
-      const response = await axios.post('http://localhost:4865/public/changeFarmerPassword', formData);
+      const response = await axios.post('http://localhost:4865/public/changePassword', formData);
 
       console.log(response);
       setRes(response.data);
@@ -65,18 +67,18 @@ function ChangePassword() {
     <>
       <div className="section log">
         <div className="logImg">
-          <img src="/images/admin.jpg" alt="" />
+          <img src="/images/forgotpassword.gif" alt="" />
         </div>
-        
+
         {isOtpSent ? (
           <div>
             <form action="" className="form-control" >
-            <h1 className="login">Welcome to VinlandFarms</h1>
+              <h1 className="login">Welcome to VinlandFarms</h1>
               <div className="inputFields">
 
-                
-                
-                
+
+
+
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
@@ -89,7 +91,7 @@ function ChangePassword() {
 
                 />
 
-                
+
                 <input
                   type="text"
                   id="otp"
@@ -101,7 +103,27 @@ function ChangePassword() {
                   className="text-field"
 
                 />
+
                 
+                <div>
+                <label>User Type:  </label>
+                <input
+                  type="radio"
+                  name="userType"
+                  value="Farmer"
+                  checked={userType === 'Farmer'}
+                  onChange={() => setUserType('Farmer')}
+                />
+                Farmer
+                <input
+                  type="radio"
+                  name="userType"
+                  value="Dealer"
+                  checked={userType === 'Dealer'}
+                  onChange={() => setUserType('Dealer')}
+                />
+                Dealer
+                </div>
                 <input
                   type="password"
                   placeholder="Enter New Password"
@@ -109,7 +131,7 @@ function ChangePassword() {
                   onChange={(e) => setNewPassword(e.target.value)}
                   className="password-field"
                 />
-                
+
                 <input
                   type="password"
                   placeholder="Confirm New Password"
@@ -124,26 +146,26 @@ function ChangePassword() {
           </div>
         ) : (
           <div className='otpBox'>
-          <form action="" className="form-control" >
-          <h1 className="login">Welcome to VinlandFarms</h1>
-            <div className="inputFields">
-            
-              <label htmlFor="otp"> Enter Email</label>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="text-field"
-                
-              />  
-               <button onClick={handleSendOtp}>Send OTP </button>
-            </div>
-           
-            
-          </form>
-        </div>
-         
+            <form action="" className="form-control" >
+              <h1 className="login">Welcome to VinlandFarms</h1>
+              <div className="inputFields">
+
+                <label htmlFor="otp"> Enter Email</label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="text-field"
+
+                />
+                <button onClick={handleSendOtp}>Send OTP </button>
+              </div>
+
+
+            </form>
+          </div>
+
         )}
 
       </div>

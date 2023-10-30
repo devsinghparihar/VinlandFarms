@@ -103,7 +103,7 @@ public class AuthController {
 	public ResponseEntity<String> sendOTP(@PathVariable String email){
 		return new ResponseEntity<String>(userService.sendOTP(email),HttpStatus.OK);
 	}
-	@PostMapping("/changeFarmerPassword")
+	@PostMapping("/changePassword")
 	public ResponseEntity<String> changeFarmerPassword(@Valid @RequestBody ChangePasswordDTO password){
 		password.setNewPassword(encoder.encode(password.getNewPassword()));
 		return new ResponseEntity<String>(userService.changePassword(password),HttpStatus.OK);

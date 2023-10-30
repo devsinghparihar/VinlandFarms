@@ -140,12 +140,12 @@ const DealerPanel = () => {
 
             <div className="right-section">
                 <div className="action-card active" onClick={handleViewActiveDealers}>
-                    <img src="/images/inactive.jpg" alt="Active Farmers" className='statusImage' />
+                    <img src="/images/inactive.gif" alt="Active Farmers" className='statusImage' />
                     <h3>View Active Dealers</h3>
                     <p>View the list of active dealers</p>
                 </div>
                 <div className="action-card" onClick={handleViewInactiveDealers}>
-                    <img src="/images/active.jpg" alt="Inactive Farmers" className='statusImage' />
+                    <img src="/images/active.gif" alt="Inactive Farmers" className='statusImage' />
                     <h3>View Inactive dealers</h3>
                     <p>View the list of inactive dealers</p>
                 </div>

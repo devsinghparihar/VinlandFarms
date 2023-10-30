@@ -23,6 +23,8 @@ import com.dealer.model.Dealer;
 import com.dealer.model.Transaction;
 import com.dealer.service.DealerServiceImpl;
 
+import jakarta.validation.Valid;
+
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -39,7 +41,7 @@ public class DealerController {
 	FarmerClient farmerClient;
 	
 	@PostMapping("/register")
-	public ResponseEntity<Dealer> registerDealer(@RequestBody Dealer dealer){
+	public ResponseEntity<Dealer> registerDealer(@Valid @RequestBody Dealer dealer){
 		return new ResponseEntity<Dealer>(dealerService.addDealer(dealer), HttpStatus.OK); 
 		
 	}
@@ -49,7 +51,7 @@ public class DealerController {
 		
 	}
 	@PutMapping("/updateDealer/{email}")
-	public ResponseEntity<UpdateDetailDTO> updateDealer(@RequestBody UpdateDetailDTO update, @PathVariable String email ){
+	public ResponseEntity<UpdateDetailDTO> updateDealer(@Valid @RequestBody UpdateDetailDTO update, @PathVariable String email ){
 		return new ResponseEntity<UpdateDetailDTO>(dealerService.updateDealer(update, email), HttpStatus.OK); 
 		
 	}
@@ -105,6 +107,10 @@ public class DealerController {
 	@GetMapping("/updateFarmerRating/{farmerId}/{rating}")
 	public ResponseEntity<String> updateFarmerRating(@PathVariable String farmerId, @PathVariable int rating){
 		return new ResponseEntity<String>(dealerService.updateFarmerRating(farmerId,rating),HttpStatus.OK);
+	}
+	@GetMapping("/changePassword/{email}/{password}")
+	public ResponseEntity<String> changePassword(@PathVariable String email, @PathVariable String password){
+		return new ResponseEntity<String>(dealerService.changePassword(email, password),HttpStatus.OK);
 	}
 	
 	

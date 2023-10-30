@@ -59,6 +59,8 @@ public interface DealerClient {
 	public List<String> findRequirements(@PathVariable String id);
 	@GetMapping("/updateFarmerRating/{farmerId}/{rating}")
 	public String updateFarmerRating(@PathVariable String farmerId, @PathVariable int rating);
+	@GetMapping("/changePassword/{email}/{password}")
+	public String changePassword(@PathVariable String email, @PathVariable String password);
 	
 
 }

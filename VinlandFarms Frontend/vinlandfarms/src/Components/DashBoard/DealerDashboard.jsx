@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Carousel from '../Carousel/carousel';
+import Home from '../StaticPages/Home';
 
 function DealerDashboard() {
   const email = useSelector((state) => state.auth.username);
   const id = useSelector((state) => state.auth.id);
 
   const [requirementsAlert, setRequirementsAlert] = useState(null);
-
+  const dealerTagline = 'Connecting Dealers with Quality Crops.';
+  const dealerPara = 'Empowering dealers with a digital marketplace to directly connect and transact with farmers. Experience the future of crop trading with us.';
+  const imgSrc = '/images/dealerBg.jpg';
   const runScan = () => {
     // Make the API call to fetch requirements
     fetch(`http://localhost:5002/dealer/findRequirements/${id}`)
@@ -52,14 +56,21 @@ function DealerDashboard() {
   }, []);
 
   return (
+    <>
+    {requirementsAlert}
+      <h1 className="text-center">Welcome Dealer</h1>
+      <Carousel></Carousel>
+      <div className="container">
+        
+      <Home tagline={dealerTagline} para={dealerPara} imgSrc={imgSrc} />
+      </div>
     <div className="container">
-      {requirementsAlert}
-      <h1 className="mt-4">Welcome Dealer</h1>
+      
 
       <div className="row">
         <div className="col-md-4 mb-4">
           <div className="card">
-            <img src="/images/farmer1.jpg" className="card-img-top" alt="Add Crop" />
+            <img src="/images/DealerCrop.jpg" className="card-img-top" alt="Add Crop" />
             <div className="card-body">
               <h2 className="card-title">Buy Crops</h2>
               <p className="card-text">Click to add a new crop to your inventory.</p>
@@ -72,7 +83,7 @@ function DealerDashboard() {
 
         <div className="col-md-4 mb-4">
           <div className="card">
-            <img src="/images/farmer2.jpg" className="card-img-top" alt="Transaction History" />
+            <img src="/images/DealerCrop2.jpg" className="card-img-top" alt="Transaction History" />
             <div className="card-body">
               <h2 className="card-title">Transaction History</h2>
               <p className="card-text">View your past transactions and earnings.</p>
@@ -85,7 +96,7 @@ function DealerDashboard() {
 
         <div className="col-md-4 mb-4">
           <div className="card">
-            <img src="/images/farmer3.jpg" className="card-img-top" alt="Update Profile" />
+            <img src="/images/DealerCrop1.jpg" className="card-img-top" alt="Update Profile" />
             <div className="card-body">
               <h2 className="card-title">Update Profile</h2>
               <p className="card-text">Edit your profile details and preferences.</p>
@@ -97,6 +108,8 @@ function DealerDashboard() {
         </div>
       </div>
     </div>
+    
+    </>
   );
 }
 

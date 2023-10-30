@@ -24,6 +24,8 @@ import com.admin.model.Farmer;
 import com.admin.model.Transaction;
 import com.admin.service.AdminService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -35,13 +37,13 @@ public class AdminController {
     
 
     @PostMapping("/add")
-    public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin) {
+    public ResponseEntity<Admin> addAdmin(@Valid @RequestBody Admin admin) {
         Admin addedAdmin = adminService.addAdmin(admin);
         return new ResponseEntity<>(addedAdmin, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin, @PathVariable String id) {
+    public ResponseEntity<Admin> updateAdmin(@Valid @RequestBody Admin admin, @PathVariable String id) {
         Admin updatedAdmin = adminService.updateAdmin(admin, id);
         return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
     }
@@ -75,13 +77,13 @@ public class AdminController {
     }
 
     @PutMapping("/updateFarmer/{email}")
-    public ResponseEntity<FarmerUpdateDTO> updateFarmer(@RequestBody FarmerUpdateDTO farmerUpdateDTO, @PathVariable String email) {
+    public ResponseEntity<FarmerUpdateDTO> updateFarmer(@Valid @RequestBody FarmerUpdateDTO farmerUpdateDTO, @PathVariable String email) {
         FarmerUpdateDTO updatedFarmer = adminService.updateFarmer(farmerUpdateDTO, email);
         return new ResponseEntity<>(updatedFarmer, HttpStatus.OK);
     }
 
     @PutMapping("/updateDealer/{email}")
-    public ResponseEntity<DealerUpdateDTO> updateDealer(@RequestBody DealerUpdateDTO dealerUpdateDTO, @PathVariable String email) {
+    public ResponseEntity<DealerUpdateDTO> updateDealer(@Valid @RequestBody DealerUpdateDTO dealerUpdateDTO, @PathVariable String email) {
         DealerUpdateDTO updatedDealer = adminService.updateDealer(dealerUpdateDTO, email);
         return new ResponseEntity<>(updatedDealer, HttpStatus.OK);
     }

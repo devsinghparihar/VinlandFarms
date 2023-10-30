@@ -118,6 +118,7 @@
 .statusImage{
     height: 10em;
     width: 11em;
+    border-radius: 15px;
 }
 #updateBtn{
     margin-right: 5px;

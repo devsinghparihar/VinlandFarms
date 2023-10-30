@@ -102,27 +102,38 @@ function Navbar() {
         // Navigate back in the history
         history.goBack();
     };
+    const handleAbout = () =>{
+        history.push('/aboutus');
+    }
+    const handleContact = () =>{
+        history.push('/contactus');
+    }
+    const handleHome = (home) =>{
+        history.push(`/${home}`);
+    }
 
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <h4>Vinland Farms</h4>
+            <img src="/images/logo.png" alt="" />
+                
+                
             </div>
             <ul className="navbar-links">
                 {isAuthenticated && (
                     <div className="role-buttons">
                         {role === 'ROLE_ADMIN' && (
                             <div className="role-button">
-                                <button>Admin Button 1</button>
-                                <button>Admin Button 2</button>
-                                <button>Admin Button 3</button>
+                                <button onClick={() => handleHome('AdminDashboard')}>Home</button>
+                                <button onClick={handleAbout}>About</button>
+                                <button onClick={handleContact}>Contact Us</button>
                             </div>
                         )}
                         {role === 'ROLE_FARMER' && (
                             <div className="role-button">
-                                <button>Farmer Button 1</button>
-                                <button>Farmer Button 2</button>
-                                <button>Farmer Button 3</button>
+                                <button onClick={() => handleHome('FarmerDashboard')}>Home</button>
+                                <button onClick={handleAbout}>About</button>
+                                <button onClick={handleContact}>Contact Us</button>
                             </div>
                         )}
                         {role === 'ROLE_DEALER' && (
@@ -196,7 +207,9 @@ function Navbar() {
                                         </div>
                                     </div>
                                 )}
-                                <button onClick={dealerHome}>Home</button>
+                                <button onClick={() => handleHome('DealerDashboard')}>Home</button>
+                                <button onClick={handleAbout}>About</button>
+                                <button onClick={handleContact}>Contact Us</button>
                             </div>
                         )}
                     </div>

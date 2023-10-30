@@ -14,11 +14,14 @@ import com.admin.clients.TransactionClient;
 import com.admin.dtos.DealerUpdateDTO;
 import com.admin.dtos.FarmerRatingDTO;
 import com.admin.dtos.FarmerUpdateDTO;
+import com.admin.exceptions.EmailAlreadyExists;
+import com.admin.exceptions.ResourceNotFoundException;
 import com.admin.model.Admin;
 import com.admin.model.Dealer;
 import com.admin.model.Farmer;
 import com.admin.model.Transaction;
 import com.admin.repository.AdminRepository;
+
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -34,14 +37,20 @@ public class AdminServiceImpl implements AdminService {
 	TransactionClient transactionClient;
 
 	@Override
-	public Admin addAdmin(Admin admin) {
+	public Admin addAdmin(Admin admin) throws EmailAlreadyExists {
+		if(ar.findByEmail(admin.getEmail()) !=null ) {
+			throw new EmailAlreadyExists("User with email"+admin.getEmail()+" already exists");
+		}
 		// TODO Auto-generated method stub
 		return ar.save(admin);
 	}
 
 	@Override
-	public Admin updateAdmin(Admin admin, String id) {
+	public Admin updateAdmin(Admin admin, String id) throws ResourceNotFoundException{
 		// TODO Auto-generated method stub
+		if(ar.findById(id).isEmpty()) {
+			throw new ResourceNotFoundException("Admin not found with this id");
+		}
 		Admin a = ar.findById(id).get();
 		a.setGender(admin.getGender());
 		a.setName(admin.getName());
@@ -103,13 +112,17 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public FarmerUpdateDTO updateFarmer(FarmerUpdateDTO f, String email) {
 		// TODO Auto-generated method stub
+		if(farmerClient.findFarmerByEmail(email) == null) {
+			throw new ResourceNotFoundException("Farmer with email: "+email+" not found");
+		}
 		return farmerClient.updateFarmer(f, email);
 	}
 
 	@Override
 	public DealerUpdateDTO updateDealer(DealerUpdateDTO f, String email) {
-		
+	
 		// TODO Auto-generated method stub
+	
 		return dealerClient.updateDealer(f, email);
 	}
 
@@ -132,17 +145,26 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Admin findAdminByEmail(String email) {
 		// TODO Auto-generated method stub
+		if(ar.findByEmail(email) == null) {
+			throw new ResourceNotFoundException("Admin with this email not found");
+		}
 		return ar.findByEmail(email).get();
 	}
 
 	@Override
 	public Farmer deleteFarmerById(String id) {
 		// TODO Auto-generated method stub
+		if(farmerClient.findFarmerById(id)==null) {
+			throw new ResourceNotFoundException("Farmer with this id not found");
+		}
 		return farmerClient.deleteFarmerById(id);
 	}
 	@Override
 	public Dealer deleteDealerById(String id) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
+		if (dealerClient.findFarmerById(id) == null) {
+			throw new ResourceNotFoundException("Dealer not found");
+		}
 		return dealerClient.deleteDealerById(id);
 	}
 

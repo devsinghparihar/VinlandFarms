@@ -11,6 +11,7 @@ import com.dealer.model.Transaction;
 
 
 
+
 public interface DealerService {
 	
 	Dealer addDealer(Dealer d) throws EmailAlreadyExists  ;
@@ -25,6 +26,7 @@ public interface DealerService {
 	List<Transaction> findTransactionsByDealerId(String id) throws ResourceNotFoundException;
 	boolean runScan(String dealerId) throws ResourceNotFoundException;
 	List<String> findRequirements(String dealerId) throws ResourceNotFoundException;
+	String changePassword(String email, String newPassword) throws ResourceNotFoundException;
 	String updateFarmerRating(String farmerId, int rating) throws ResourceNotFoundException;
 	
 

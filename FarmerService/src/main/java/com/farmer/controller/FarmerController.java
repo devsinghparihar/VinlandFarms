@@ -38,17 +38,17 @@ public class FarmerController {
 		
 	}
 	@PostMapping("/addCrop/{email}")
-	public ResponseEntity<Farmer> addCrop(@RequestBody Crop crop, @PathVariable String email ){
+	public ResponseEntity<Farmer> addCrop(@Valid @RequestBody Crop crop, @PathVariable String email ){
 		return new ResponseEntity<Farmer>(farmerService.addCrop(crop, email), HttpStatus.OK); 
 		
 	}
 	@PutMapping("/updateFarmer/{email}")
-	public ResponseEntity<UpdateDetailDTO> updateFarmer(@RequestBody UpdateDetailDTO update, @PathVariable String email ){
+	public ResponseEntity<UpdateDetailDTO> updateFarmer(@Valid @RequestBody UpdateDetailDTO update, @PathVariable String email ){
 		return new ResponseEntity<UpdateDetailDTO>(farmerService.updateFarmer(update, email), HttpStatus.OK); 
 		
 	}
 	@PutMapping("/updateFarmer")
-	public ResponseEntity<Farmer> updateFarmer(@RequestBody Farmer farmer ){
+	public ResponseEntity<Farmer> updateFarmer(@Valid @RequestBody Farmer farmer ){
 		return new ResponseEntity<Farmer>(farmerService.updateFarmer(farmer), HttpStatus.OK); 
 		
 	}

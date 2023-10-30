@@ -21,6 +21,10 @@ Exception response JSON
 
 functionality
 
-
+Frontend validations 
+Clear database 
+Forgot password dealer
+nav bar buttons
+alert on admin frontend requests , dealer update through admin
 Delete unnecessary models, controller repo dto from security MS
 

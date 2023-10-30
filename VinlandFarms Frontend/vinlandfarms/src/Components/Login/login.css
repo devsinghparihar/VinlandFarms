@@ -46,6 +46,7 @@
     align-items: flex-start;
     height: 180px;
     justify-content: center;
+    margin: 2px;
 }
 
 .login{
@@ -88,6 +89,7 @@ label{
     font-weight: 400;
     transition: all 0.2s ease-in-out;
     background: none;
+    margin: 2px;
 }
 
 .text-field:focus, .password-field:focus{

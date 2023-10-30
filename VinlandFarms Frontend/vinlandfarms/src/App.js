@@ -22,10 +22,12 @@ import DealerPanel from './Components/AdminComponents/DealerPanel';
 import UpdateDealer from './Components/AdminComponents/UpdateDealer';
 import Navbar from './Components/navbar/Navbar';
 import PrivateRoute from './PrivateRoute'; // Import the PrivateRoute component
-import ForgotPassword from './Components/Login/ForgotPassword';
 import ChangePassword from './Components/Login/ChangePassword';
 import PaymentPage from './Components/DealerComponents/PaymentPage';
 import PaymentConfirm from './Components/DealerComponents/PaymentConfirm';
+import Footer from './Components/Footer/footer';
+import AboutUs from './Components/StaticPages/AboutUs';
+import ContactUs from './Components/StaticPages/ContactUs';
 
 function App() {
   return (
@@ -36,11 +38,12 @@ function App() {
           <Switch>
           <Route exact path="/" component={LoginForm} />
             <Route path="/login" component={LoginForm} />
+            <Route path="/aboutus" component={AboutUs} />
+            <Route path="/contactus" component={ContactUs} />
             <Route  path='/forgotPassword' component={ChangePassword}></Route>
             <Route path="/farmer-registration" component={FarmerRegistration} />
             <Route path="/dealer-registration" component={DealerRegistration} />
             <Route path="/admin-registration"  component={AdminRegistration} />
-            {/* <Route path="/paymentConfirm"  component={PaymentConfirm} /> */}
             <PrivateRoute path="/AdminDashboard" role="ROLE_ADMIN" component={AdminDashboard} />
             <PrivateRoute path="/FarmerDashboard" role="ROLE_FARMER" component={FarmerDashboard} />
             <PrivateRoute path="/DealerDashboard" role="ROLE_DEALER" component={DealerDashboard} />
@@ -58,7 +61,9 @@ function App() {
             <PrivateRoute path='/updateFarmerDetails/:farmerId/:email' role="ROLE_ADMIN" component={UpdateFarmer} />
             <PrivateRoute path='/updateDealerDetails/:dealerId/:email' role="ROLE_ADMIN" component={UpdateDealer} />
           </Switch>
+          
         </div>
+        {/* <Footer/> */}
       </Router>
     </Provider>
   );

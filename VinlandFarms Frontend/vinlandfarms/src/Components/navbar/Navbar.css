@@ -137,3 +137,7 @@
   border-radius: 9px;
     padding: 14px 166px
  }
+ .navbar-logo img{
+  width: 9em;
+  height: 33px;
+ }

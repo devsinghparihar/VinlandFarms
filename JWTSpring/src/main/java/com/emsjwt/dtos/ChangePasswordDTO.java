@@ -12,5 +12,6 @@ public class ChangePasswordDTO {
 	String email;
 	int otp;
 	String newPassword;
+	String userType;
 
 }

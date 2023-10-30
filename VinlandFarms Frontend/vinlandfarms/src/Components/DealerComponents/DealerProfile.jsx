@@ -113,22 +113,7 @@ const DealerProfile = () => {
                                     </div>
                                 </div>
 
-                                {/* <div className="row mt-2">
-                  <div className="col-md-6">
-                    <label className="labels-profileDetails">Location</label>
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      className="form-control-profileDetails"
-                      name="location"
-                      placeholder={profileData.location}
-                      value={formData.location}
-                      onChange={handleChange} 
-                    />
-                  </div>
-
-                </div> */}
+                          
 
                                 <div className="row mt-2">
                                     <div className="col-md-6">

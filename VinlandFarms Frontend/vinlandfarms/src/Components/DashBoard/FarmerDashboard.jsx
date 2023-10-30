@@ -1,13 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Carousel from '../Carousel/carousel';
+import Home from '../StaticPages/Home';
 // import { update } from '../assets/download.jpg'
 
 function FarmerDashboard() {
   const email = useSelector(state => state.auth.username);
+  const farmerTagline = 'Farmers Unite for Prosperity.';
+  const farmerPara = 'Bringing farmers together in a digital farming ecosystem. Empower yourself with technology and unlock the potential of your farm.';
+  const imgSrc = '/images/background.jpg';
   return (
+    <>
+    <h1 className="text-center">Welcome, Farmer</h1>
+    <Carousel></Carousel>
     <div className="container">
-      <h1 className="mt-4">Welcome, Farmer</h1>
+      <Home tagline={farmerTagline} para={farmerPara} imgSrc={imgSrc} />
+      </div>
+    <div className="container">
+      
 
       <div className="row">
         <div className="col-md-4 mb-4">
@@ -44,6 +55,7 @@ function FarmerDashboard() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
