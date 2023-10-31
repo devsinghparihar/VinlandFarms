@@ -11,6 +11,7 @@ function FarmerRegistration() {
   const [location, setLocation] = useState('');
   const [age, setAge] = useState(0);
   const [accountNumber, setAccountNumber] = useState('');
+  const [accountBalance, setAccountBalance] = useState(0);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -24,6 +25,7 @@ function FarmerRegistration() {
       location,
       age,
       accountNumber,
+      accountBalance,
     };
 
     try {

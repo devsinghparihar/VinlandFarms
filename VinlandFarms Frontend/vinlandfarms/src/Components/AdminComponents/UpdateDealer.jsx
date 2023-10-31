@@ -33,7 +33,7 @@ const UpdateDealer = () => {
                 formData,authHeader
 
             );
-
+            alert("Dealer  details with email "+email+" updated")
             console.log('dealer details updated:', response.data);
         } catch (error) {
             console.error('Error updating dealer details:', error);

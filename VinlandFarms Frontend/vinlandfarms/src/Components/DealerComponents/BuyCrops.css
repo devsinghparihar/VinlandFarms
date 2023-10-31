@@ -27,7 +27,7 @@
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     background-color: #fff;
-    width: 300px;
+    width: 280px;
     transition: transform 0.2s ease; /* Add a smooth hover effect */
     cursor: pointer;
   }

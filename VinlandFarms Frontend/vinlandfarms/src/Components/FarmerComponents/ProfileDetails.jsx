@@ -36,7 +36,7 @@ const ProfileDetails = () => {
       const response = await axios.put(
         `http://localhost:4865/farmer/updateFarmer/${email}`,formData,config
       );
-
+      alert(`Farmer details with email: ${email} updated`);
       console.log('Farmer details updated:', response.data);
     } catch (error) {
       console.error('Error updating farmer details:', error);

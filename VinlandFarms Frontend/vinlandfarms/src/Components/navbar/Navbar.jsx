@@ -16,6 +16,7 @@ function Navbar() {
     const id = useSelector((state) => state.auth.id);
     const token = useSelector((state) => state.auth.token);
     const location = useLocation();
+    const [coupon, setCoupon] = useState(0);
 
     //add money 
     const [showModal, setShowModal] = useState(false);
@@ -112,6 +113,9 @@ function Navbar() {
         history.push(`/${home}`);
     }
 
+    const generateCoupon = (a,b) =>{
+        alert(Math.floor(Math.random()*(a-b+1)+a));
+    }
     return (
         <nav className="navbar">
             <div className="navbar-logo">
@@ -210,6 +214,7 @@ function Navbar() {
                                 <button onClick={() => handleHome('DealerDashboard')}>Home</button>
                                 <button onClick={handleAbout}>About</button>
                                 <button onClick={handleContact}>Contact Us</button>
+                                {/* <button onClick={()=>generateCoupon(234,344)}>Coupon</button> */}
                             </div>
                         )}
                     </div>

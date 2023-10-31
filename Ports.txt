@@ -26,5 +26,6 @@ Clear database
 Forgot password dealer
 nav bar buttons
 alert on admin frontend requests , dealer update through admin
+buy crop should have validations 
 Delete unnecessary models, controller repo dto from security MS
 
