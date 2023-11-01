@@ -1,0 +1,68 @@
+/* Receipt.css */
+
+.receipt-container {
+    margin-top: 3em;
+  background-color: #282a36;
+  color: #f8f8f2;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.receipt-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  background-color: #44475A;
+}
+
+.receipt-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #FF79C6 
+}
+
+.receipt-info {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.receipt-info p {
+  margin: 5px 0;
+}
+
+.download-button {
+  background-color: #FF79C6; /* Green color */
+  color: #282a36;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 65px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+  transition: background-color 0.2s;
+}
+
+.download-button:hover {
+  background-color: #5af78e; /* Lighter green color on hover */
+}
+
+.close-button {
+  background-color: #FF79C6; /* Red color */
+  color: #282a36;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 65px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: #FF5555; /* Lighter red color on hover */
+}
+
+.buttons-container {
+  margin-top: 20px;
+}
