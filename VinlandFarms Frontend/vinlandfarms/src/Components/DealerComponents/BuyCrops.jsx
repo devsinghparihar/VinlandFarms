@@ -27,38 +27,28 @@ function BuyCrops() {
 
   const handleBuyNow = async () => {
     if (selectedCrop) {
-      const { farmerId, cropType, cropPrice } = selectedCrop;
+      const { farmerId, cropType, cropPrice, cropQuantity } = selectedCrop;
       const estimatedPrice = quantity * cropPrice;
-      const paymentData = {
-        farmerId,
-        dealerId,
-        cropType,
-        quantity,
-        cropPrice,
-        estimatedPrice
-      };
-
-      // Navigate to the payment page and pass paymentData as state
-      alert("Redirecting to payment page")
-      history.push('/payment', { paymentData });
-      // Extract information from the selected crop
-      // const { farmerId, cropType, cropPrice } = selectedCrop;
-      
-
-      // // Calculate the estimated price
-      // const estimatedPrice = quantity * cropPrice;
-
-      
-      // // http://localhost:5006/dealer/buyCrop/1/1/1/1'
-      // try{
-      //   console.log(generateConfig(token))
-      // const res =await axios.post(`http://localhost:4865/dealer/buyCrop/${farmerId}/${dealerId}/${cropType}/${quantity}`,null,generateConfig(token))
-      //  console.log(res.data); }
-      //  catch(error){
-      //   console.log(error)
-      //  }
+  
+      if (quantity > cropQuantity) {
+        alert(`Selected quantity exceeds available quantity (${cropQuantity}). Please select a valid quantity.`);
+      } else {
+        const paymentData = {
+          farmerId,
+          dealerId,
+          cropType,
+          quantity,
+          cropPrice,
+          estimatedPrice
+        };
+  
+        // Navigate to the payment page and pass paymentData as state
+        alert("Redirecting to payment page")
+        history.push('/payment', { paymentData });
+      }
     }
   };
+  
 
   return (
     <div className="buy-crops-container">

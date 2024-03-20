@@ -160,3 +160,10 @@
 .invalid .registration-button {
   background-color: #ff0000;
 }
+.error-message {
+  font-size: 12px;
+  color: #ff0000; /* Red color for error messages */
+  margin-top: 5px;
+}
+
+

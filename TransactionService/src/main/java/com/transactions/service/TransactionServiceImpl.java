@@ -79,16 +79,9 @@ public class TransactionServiceImpl implements TransactionService {
 
 		
 		dealerEmail.setText(dealerMessage);
-		farmerEmail.setText(farmerMessage);
-		
-		
-		
-		
-		
+		farmerEmail.setText(farmerMessage);	
 		emailClient.sendMail(dealerEmail);
 		emailClient.sendMail(farmerEmail);
-		
-		
 		return tr.save(generatedTransaction);
 	}
 

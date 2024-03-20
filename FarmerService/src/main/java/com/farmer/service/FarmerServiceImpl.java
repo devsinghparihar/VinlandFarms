@@ -159,9 +159,9 @@ public class FarmerServiceImpl implements FarmerService {
 
 	@Override
 	public Farmer updateFarmer(Farmer farmer) throws FarmerNotFoundException {
-		String id = farmer.getFarmerId();
-		if(fr.findById(id).isEmpty()) {
-			throw new FarmerNotFoundException("Farmer with id "+id+" does not exist");
+		//String id = farmer.getFarmerId();
+		if(fr.findById(farmer.getFarmerId()).isEmpty()) {
+			throw new FarmerNotFoundException("Farmer with id "+farmer.getFarmerId()+" does not exist");
 		}
 		// TODO Auto-generated method stub
 		return fr.save(farmer);
@@ -201,14 +201,23 @@ public class FarmerServiceImpl implements FarmerService {
 
 	@Override
 	public String updateRating(String farmerId, int rating) throws FarmerNotFoundException {
-		// TODO Auto-generated method stub
-		if(fr.findById(farmerId).isEmpty()) {
-			throw new FarmerNotFoundException("Farmer with id "+farmerId+" does not exist");
-		}
-		Farmer farmer = fr.findById(farmerId).get();
-		farmer.setRating((int)(farmer.getRating()+rating)/2);
-		fr.save(farmer);
-		return "Rating Updated";
+		if (fr.findById(farmerId).isEmpty()) {
+	        throw new FarmerNotFoundException("Farmer with id " + farmerId + " does not exist");
+	    }
+	    Farmer farmer = fr.findById(farmerId).get();
+
+	    if (farmer.getRating() == 0) {
+	        // The first rating, set it to the given rating
+	        farmer.setRating(rating);
+	    } else {
+	        // Average out the rating with the given rating
+	        int totalRating = farmer.getRating() + rating;
+	        int averageRating = totalRating / 2;
+	        farmer.setRating(averageRating);
+	    }
+
+	    fr.save(farmer);
+	    return "Rating Updated";
 	}
 
 	

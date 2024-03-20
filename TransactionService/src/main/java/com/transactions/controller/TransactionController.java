@@ -21,6 +21,11 @@ import com.transactions.service.TransactionServiceImpl;
 @RequestMapping("/transaction")
 @CrossOrigin(origins = "http://localhost:3000")
 public class TransactionController {
+	
+	public TransactionController(TransactionServiceImpl transactionService) {
+		super();
+		this.transactionService = transactionService;
+	}
 	@Autowired
 	TransactionServiceImpl transactionService;
 	

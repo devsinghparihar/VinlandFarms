@@ -153,6 +153,7 @@ public class DealerServiceImpl implements DealerService {
 							List<Crop> updatedCrops = farmer.getCrops();
 							updatedCrops.remove(crop);
 							farmer.setCrops(updatedCrops);
+							farmer.setAccountBalance((long) (farmer.getAccountBalance()+calculateTotal(crop.getCropPrice(), quantity)));
 							farmerClient.updateFarmer(farmer);
 							dr.save(dealer);
 							break;
@@ -168,6 +169,7 @@ public class DealerServiceImpl implements DealerService {
 							updatedCrops.remove(crop);
 							updatedCrops.add(updatedCrop);
 							farmer.setCrops(updatedCrops);
+							farmer.setAccountBalance((long) (farmer.getAccountBalance()+calculateTotal(crop.getCropPrice(), quantity)));
 							farmerClient.updateFarmer(farmer);
 							dr.save(dealer);
 							break;
@@ -290,6 +292,8 @@ public class DealerServiceImpl implements DealerService {
 		dr.save(dealer);
 		return "Password changed Successfully";
 	}
+	
+	
 	
 	
 	

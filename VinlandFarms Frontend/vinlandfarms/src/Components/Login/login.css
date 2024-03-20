@@ -97,6 +97,10 @@ label{
     width: 320px;
 }
 
+#eInvalid{
+    margin-top: 3px;
+}
+
 /* .otpBox{
     height: 300px;
 } */

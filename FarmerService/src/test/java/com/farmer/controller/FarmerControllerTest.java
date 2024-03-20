@@ -1,27 +1,24 @@
 package com.farmer.controller;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import com.farmer.dtos.CropDetailDTO;
 import com.farmer.dtos.UpdateDetailDTO;
 import com.farmer.model.Crop;
 import com.farmer.model.Farmer;
 import com.farmer.model.Transaction;
 import com.farmer.service.FarmerServiceImpl;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import org.springframework.mock.web.MockHttpServletRequest;
 
 public class FarmerControllerTest {
 
@@ -31,136 +28,205 @@ public class FarmerControllerTest {
     @InjectMocks
     private FarmerController farmerController;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
-    void testRegisterFarmer() throws Exception {
-        Farmer farmer = new Farmer();
-        when(farmerService.addFarmer(any(Farmer.class))).thenReturn(farmer);
+    public void testRegisterFarmer() {
+        // Arrange
+        Farmer farmerToAdd = new Farmer();
+        when(farmerService.addFarmer(farmerToAdd)).thenReturn(farmerToAdd);
 
-        ResponseEntity<Farmer> response = farmerController.registerFarmer(farmer);
+        // Act
+        ResponseEntity<Farmer> response = farmerController.registerFarmer(farmerToAdd);
 
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(farmerToAdd, response.getBody());
+    }
+
+    @Test
+    public void testAddCrop() {
+        // Arrange
+        Crop cropToAdd = new Crop();
+        String email = "farmer@example.com";
+        Farmer farmer = new Farmer(); // Create a Farmer object
+        when(farmerService.addCrop(cropToAdd, email)).thenReturn(farmer);
+
+        // Act
+        ResponseEntity<Farmer> response = farmerController.addCrop(cropToAdd, email);
+
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(farmer, response.getBody());
-        verify(farmerService).addFarmer(any(Farmer.class));
     }
 
+    // Add test cases for the remaining methods
     @Test
-    void testAddCrop() throws Exception {
-        Crop crop = new Crop();
-        when(farmerService.addCrop(any(Crop.class), anyString())).thenReturn(new Farmer());
+    public void testUpdateFarmerWithEmail() {
+        // Arrange
+        UpdateDetailDTO update = new UpdateDetailDTO();
+        String email = "farmer@example.com";
+        when(farmerService.updateFarmer(update, email)).thenReturn(update);
 
-        ResponseEntity<Farmer> response = farmerController.addCrop(crop, "test@example.com");
+        // Act
+        ResponseEntity<UpdateDetailDTO> response = farmerController.updateFarmer(update, email);
 
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(farmerService).addCrop(any(Crop.class), anyString());
+        assertEquals(update, response.getBody());
     }
 
     @Test
-    void testUpdateFarmerByEmail() throws Exception {
-        UpdateDetailDTO updateDetailDTO = new UpdateDetailDTO();
-        when(farmerService.updateFarmer(any(UpdateDetailDTO.class), anyString())).thenReturn(updateDetailDTO);
+    public void testUpdateFarmer() {
+        // Arrange
+        Farmer farmerToUpdate = new Farmer();
+        when(farmerService.updateFarmer(farmerToUpdate)).thenReturn(farmerToUpdate);
 
-        ResponseEntity<UpdateDetailDTO> response = farmerController.updateFarmer(updateDetailDTO, "test@example.com");
+        // Act
+        ResponseEntity<Farmer> response = farmerController.updateFarmer(farmerToUpdate);
 
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(updateDetailDTO, response.getBody());
-        verify(farmerService).updateFarmer(any(UpdateDetailDTO.class), anyString());
+        assertEquals(farmerToUpdate, response.getBody());
     }
 
     @Test
-    void testUpdateFarmer() throws Exception {
-        Farmer farmer = new Farmer();
-        when(farmerService.updateFarmer(any(Farmer.class))).thenReturn(farmer);
+    public void testGetAllFarmers() {
+        // Arrange
+        List<Farmer> allFarmers = new ArrayList<>(); // Create a list of farmers
+        when(farmerService.getAll()).thenReturn(allFarmers);
 
-        ResponseEntity<Farmer> response = farmerController.updateFarmer(farmer);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(farmer, response.getBody());
-        verify(farmerService).updateFarmer(any(Farmer.class));
-    }
-
-    @Test
-    void testGetAllFarmers() throws Exception {
-        List<Farmer> farmers = Collections.singletonList(new Farmer());
-        when(farmerService.getAll()).thenReturn(farmers);
-
+        // Act
         ResponseEntity<List<Farmer>> response = farmerController.getAllFarmers();
 
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(farmers, response.getBody());
-        verify(farmerService).getAll();
+        assertEquals(allFarmers, response.getBody());
     }
 
     @Test
-    void testFindFarmerById() throws Exception {
-        Farmer farmer = new Farmer();
-        when(farmerService.findFarmerById(anyString())).thenReturn(farmer);
+    public void testFindFarmerById() {
+        // Arrange
+        String farmerId = "farmer123";
+        Farmer farmer = new Farmer(); // Create a Farmer object
+        when(farmerService.findFarmerById(farmerId)).thenReturn(farmer);
 
-        ResponseEntity<Farmer> response = farmerController.findFarmerById("1");
+        // Act
+        ResponseEntity<Farmer> response = farmerController.findFarmerById(farmerId);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(farmer, response.getBody());
-        verify(farmerService).findFarmerById(anyString());
-    }
-
-    @Test
-    void testFindFarmerByEmail() throws Exception {
-        Farmer farmer = new Farmer();
-        when(farmerService.findFarmerByEmail(anyString())).thenReturn(farmer);
-
-        ResponseEntity<Farmer> response = farmerController.findFarmerByEmail("test@example.com");
-
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(farmer, response.getBody());
-        verify(farmerService).findFarmerByEmail(anyString());
     }
 
     @Test
-    void testGetAllCrops() throws Exception {
-        List<CropDetailDTO> cropDetails = Collections.singletonList(new CropDetailDTO());
-        when(farmerService.getAllCrops()).thenReturn(cropDetails);
+    public void testFindFarmerByEmail() {
+        // Arrange
+        String email = "farmer@example.com";
+        Farmer farmer = new Farmer(); // Create a Farmer object
+        when(farmerService.findFarmerByEmail(email)).thenReturn(farmer);
 
+        // Act
+        ResponseEntity<Farmer> response = farmerController.findFarmerByEmail(email);
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(farmer, response.getBody());
+    }
+
+    @Test
+    public void testGetAllCrops() {
+        // Arrange
+        List<CropDetailDTO> allCrops = new ArrayList<>(); // Create a list of crop details
+        when(farmerService.getAllCrops()).thenReturn(allCrops);
+
+        // Act
         ResponseEntity<List<CropDetailDTO>> response = farmerController.getAllCrops();
 
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(cropDetails, response.getBody());
-        verify(farmerService).getAllCrops();
+        assertEquals(allCrops, response.getBody());
     }
 
     @Test
-    void testGetCropsByType() throws Exception {
-        List<CropDetailDTO> cropDetails = Collections.singletonList(new CropDetailDTO());
-        when(farmerService.getCropsByCropType(anyString())).thenReturn(cropDetails);
+    public void testGetCropsByType() {
+        // Arrange
+        String cropType = "Wheat"; // Replace with a valid crop type
+        List<CropDetailDTO> cropsByType = new ArrayList<>(); // Create a list of crop details for the specified type
+        when(farmerService.getCropsByCropType(cropType)).thenReturn(cropsByType);
 
-        ResponseEntity<List<CropDetailDTO>> response = farmerController.getCropsByType("Wheat");
+        // Act
+        ResponseEntity<List<CropDetailDTO>> response = farmerController.getCropsByType(cropType);
 
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(cropDetails, response.getBody());
-        verify(farmerService).getCropsByCropType(anyString());
+        assertEquals(cropsByType, response.getBody());
     }
 
     @Test
-    void testGetFarmerHistory() throws Exception {
-        List<Transaction> transactions = Collections.singletonList(new Transaction());
-        when(farmerService.findTransactionsByFarmerId(anyString())).thenReturn(transactions);
+    public void testGetFarmerHistory() {
+        // Arrange
+        String farmerId = "farmer123"; // Replace with a valid farmer ID
+        List<Transaction> farmerTransactionHistory = new ArrayList<>(); // Create a list of transactions
+        when(farmerService.findTransactionsByFarmerId(farmerId)).thenReturn(farmerTransactionHistory);
 
-        ResponseEntity<List<Transaction>> response = farmerController.getFarmerHistory("1");
+        // Act
+        ResponseEntity<List<Transaction>> response = farmerController.getFarmerHistory(farmerId);
 
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(transactions, response.getBody());
-        verify(farmerService).findTransactionsByFarmerId(anyString());
+        assertEquals(farmerTransactionHistory, response.getBody());
     }
 
     @Test
-    void testDeleteFarmerById() throws Exception {
-        Farmer farmer = new Farmer();
-        when(farmerService.deleteFarmerById(anyString())).thenReturn(farmer);
+    public void testDeleteFarmerById() {
+        // Arrange
+        String farmerId = "farmer123"; // Replace with a valid farmer ID
+        Farmer farmer = new Farmer(); // Create a Farmer object
+        when(farmerService.deleteFarmerById(farmerId)).thenReturn(farmer);
 
-        ResponseEntity<Farmer> response = farmerController.deleteFarmerById("1");
+        // Act
+        ResponseEntity<Farmer> response = farmerController.deleteFarmerById(farmerId);
 
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(farmer, response.getBody());
-        verify(farmerService).deleteFarmerById(anyString());
     }
+
+    @Test
+    public void testChangePassword() {
+        // Arrange
+        String email = "farmer@example.com"; // Replace with a valid email
+        String newPassword = "newPassword"; // Replace with the desired new password
+        String resultMessage = "Password changed successfully"; // Replace with the expected result message
+        when(farmerService.changePassword(email, newPassword)).thenReturn(resultMessage);
+
+        // Act
+        ResponseEntity<String> response = farmerController.changePassword(email, newPassword);
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(resultMessage, response.getBody());
+    }
+
+    @Test
+    public void testUpdateRating() {
+        // Arrange
+        String farmerId = "farmer123"; // Replace with a valid farmer ID
+        int rating = 5; // Replace with the desired rating
+        String resultMessage = "Rating updated successfully"; // Replace with the expected result message
+        when(farmerService.updateRating(farmerId, rating)).thenReturn(resultMessage);
+
+        // Act
+        ResponseEntity<String> response = farmerController.updateRating(farmerId, rating);
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(resultMessage, response.getBody());
+    }
+
 }
+

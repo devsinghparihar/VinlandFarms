@@ -5,8 +5,10 @@ AdminService  -> 5003
 EmailService  -> 5004
 TransactionService ->5005
 SecurityServerice  ->5006
+PaymentSercive -> 5007
 FarmLand Registry ->8761
 API gateWay       ->4865
+
 key -> wtumtiygdvvqlkgw
 
 Remaining requirements->
@@ -17,15 +19,14 @@ Optionals
 Throwing exceptions 
 circuit breaker
 Exception response JSON
-
-
+fallback
+Backend validations 
+Frontend validation
+payment service client in security
+change password dealer
 functionality
 
-Frontend validations 
-Clear database 
-Forgot password dealer
-nav bar buttons
-alert on admin frontend requests , dealer update through admin
-buy crop should have validations 
+generate report
 Delete unnecessary models, controller repo dto from security MS
+
 

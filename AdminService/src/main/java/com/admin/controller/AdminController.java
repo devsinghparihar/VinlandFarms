@@ -106,6 +106,8 @@ public class AdminController {
     public ResponseEntity<List<Transaction>> getAllTransaction(){
     	return new ResponseEntity<>(adminService.getAllTransaction(),HttpStatus.OK);
     }
+    
+    
     	
 }
 

@@ -11,9 +11,6 @@ import DealerRegistration from './Components/register/DealerRegister';
 import AdminRegistration from './Components/register/AdminRegister';
 import AddCropForm from './Components/FarmerComponents/AddCropForm';
 import BuyCrops from './Components/DealerComponents/BuyCrops';
-import TransactionList from './Components/AdminComponents/TransactionList';
-import DealerTransactionList from './Components/DealerComponents/TransactionList';
-import FarmerTransactionList from './Components/FarmerComponents/TransactionList';
 import ProfileDetails from './Components/FarmerComponents/ProfileDetails';
 import DealerProfile from './Components/DealerComponents/DealerProfile';
 import FarmerPanel from './Components/AdminComponents/FarmerPanel';
@@ -28,6 +25,7 @@ import PaymentConfirm from './Components/DealerComponents/PaymentConfirm';
 import Footer from './Components/Footer/footer';
 import AboutUs from './Components/StaticPages/AboutUs';
 import ContactUs from './Components/StaticPages/ContactUs';
+import TransactionList from './Components/TransactionDetails/TransactionList';
 
 function App() {
   return (
@@ -51,9 +49,9 @@ function App() {
             <PrivateRoute path="/paymentConfirm" role="ROLE_DEALER" component={PaymentConfirm} />
             <PrivateRoute path="/addCrop" role="ROLE_FARMER" component={AddCropForm} />
             <PrivateRoute path="/buyCrop" role="ROLE_DEALER" component={BuyCrops} />
-            <PrivateRoute path="/allTransactions" role="ROLE_ADMIN" component={TransactionList} />
-            <PrivateRoute path="/dealerTransactions" role="ROLE_DEALER" component={DealerTransactionList} />
-            <PrivateRoute path="/farmerTransactions" role="ROLE_FARMER" component={FarmerTransactionList} />
+            <Route path="/transactions" component={TransactionList} />
+            {/* <PrivateRoute path="/dealerTransactions" role="ROLE_DEALER" component={DealerTransactionList} />
+            <PrivateRoute path="/farmerTransactions" role="ROLE_FARMER" component={FarmerTransactionList} /> */}
             <PrivateRoute path="/farmerProfile" role="ROLE_FARMER" component={ProfileDetails} />
             <PrivateRoute path="/dealerProfile" role="ROLE_DEALER" component={DealerProfile} />
             <PrivateRoute path="/farmerPanel" role="ROLE_ADMIN" component={FarmerPanel} />

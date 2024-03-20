@@ -5,23 +5,53 @@ import jsPDF from 'jspdf';
 import './Recipt.css'; // Import the CSS file for styling
 
 class Receipt extends React.Component {
-  generatePDF = () => {
-    const pdf = new jsPDF();
-    const { transactionDetails } = this.props;
-
-    pdf.text(20, 20, 'Receipt');
-    pdf.text(20, 30, '------------------------');
-    pdf.text(20, 40, `Transaction ID: ${transactionDetails.transactionId}`);
-    pdf.text(20, 50, `Farmer: ${transactionDetails.farmerEmail}`);
-    pdf.text(20, 60, `Dealer: ${transactionDetails.dealerEmail}`);
-    pdf.text(20, 70, `Crop Type: ${transactionDetails.cropType}`);
-    pdf.text(20, 80, `Quantity: ${transactionDetails.quantity}`);
-    pdf.text(20, 90, `Price per Kg: $${transactionDetails.pricePerKg}`);
-    pdf.text(20, 100, `Total Price: $${transactionDetails.totalPrice}`);
-    pdf.text(20, 110, `Booking Time: ${new Date(transactionDetails.bookingTime).toLocaleString()}`);
-
-    pdf.save('receipt.pdf');
-  };
+    generatePDF = () => {
+        const jsPDF = require('jspdf');
+        require('jspdf-autotable');
+        const pdf = new jsPDF.default();
+      
+        const { transactionDetails } = this.props;
+      
+        pdf.setFont('Arial');
+        pdf.setFontSize(12);
+      
+        // Header
+        pdf.text(20, 20, 'Vinland Farms Receipt');
+        pdf.text(20, 30, 'Thank you for choosing Vinland Farms for your agricultural needs.');
+        pdf.text(20, 40, 'Here is your transaction receipt:');
+      
+        const data = [['Item', 'Details']];
+        data.push(['Transaction ID', transactionDetails.transactionId]);
+        data.push(['Farmer', transactionDetails.farmerEmail]);
+        data.push(['Dealer', transactionDetails.dealerEmail]);
+        data.push(['Crop Type', transactionDetails.cropType]);
+        data.push(['Quantity', transactionDetails.quantity]);
+        data.push(['Price per Kg', `$${transactionDetails.pricePerKg}`]);
+        data.push(['Total Price', `$${transactionDetails.totalPrice}`]);
+        data.push(['Booking Time', new Date(transactionDetails.bookingTime).toLocaleString()]);
+      
+        // Table styling
+        pdf.autoTable({
+          head: data,
+          startY: 60,
+          theme: 'plain',
+          styles: {
+            fontSize: 12,
+            overflow: 'linebreak',
+            columnWidth: 'wrap',
+          },
+          margin: { top: 60 },
+        });
+      
+        // Footer
+        pdf.text(20, pdf.autoTable.previous.finalY + 20, 'Thank you for your business!');
+      
+        pdf.save('receipt.pdf');
+      };
+      
+      
+      
+      
 
   render() {
     const { transactionDetails, onClose } = this.props;

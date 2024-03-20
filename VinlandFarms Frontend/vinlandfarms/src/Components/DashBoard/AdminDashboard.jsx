@@ -55,7 +55,7 @@ function AdminDashboard() {
               <h2 className="card-title">Transaction History</h2>
               <p className="card-text">View All transactions.</p>
               
-              <Link to="/allTransactions" className="dashboardBtn text-center">View </Link>
+              <Link to="/transactions" className="dashboardBtn text-center">View </Link>
             </div>
           </div>
         </div>

@@ -34,7 +34,8 @@ const DealerProfile = () => {
             const response = await axios.post(
                 `http://localhost:4865/dealer/updateDealer/${email}`,formData,config );
 
-            console.log('Farmer details updated:', response.data);
+            console.log('Dealer details updated:', response.data);
+            alert(`Dealer details with email: ${email} updated`);
         } catch (error) {
             console.error('Error updating farmer details:', error);
             alert("an error occured")

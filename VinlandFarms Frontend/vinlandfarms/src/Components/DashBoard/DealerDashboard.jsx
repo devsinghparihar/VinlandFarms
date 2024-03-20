@@ -87,7 +87,7 @@ function DealerDashboard() {
             <div className="card-body">
               <h2 className="card-title">Transaction History</h2>
               <p className="card-text">View your past transactions and earnings.</p>
-              <Link to="/dealerTransactions" className="btn btn-primary">
+              <Link to="/transactions" className="btn btn-primary">
                 View History
               </Link>
             </div>

@@ -1,4 +1,4 @@
-package com.admin.repository;
+ 	package com.admin.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

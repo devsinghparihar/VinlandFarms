@@ -12,20 +12,37 @@ function TransactionList() {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = useSelector(state => state.auth.token);
+  const role = useSelector(state => state.auth.role);
+  const id = useSelector(state => state.auth.id);
+  const [api, setApi] = useState('');
 
+  const determineApi = () => {
+    if (role === 'ROLE_ADMIN') {
+      setApi('http://localhost:4865/admin/getAllTransactions');
+    } else if (role === 'ROLE_FARMER') {
+      setApi(`http://localhost:4865/farmer/farmerTransactionHistory/${id}`);
+    } else if (role === 'ROLE_DEALER') {
+      setApi(`http://localhost:4865/dealer/dealerTransactionHistory/${id}`);
+    }
+  };
+  const fetchTransactions = () => {
+    if (api) {
+      axios
+        .get(api, generateConfig(token))
+        .then((response) => {
+          setTransactions(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching transactions:', error);
+          setLoading(false);
+        });
+    }
+  };
   useEffect(() => {
-    axios
-      .get('http://localhost:4865/admin/getAllTransactions',generateConfig(token))
-      .then((response) => {
-        setTransactions(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching transactions:', error);
-        setLoading(false);
-      });
-  }, []);
-
+    determineApi(); 
+    fetchTransactions(); 
+  }, [role, id, api, token]);
   const viewReceipt = (transaction) => {
     setSelectedTransaction(transaction);
   };
@@ -46,7 +63,7 @@ function TransactionList() {
                 <th>Dealer</th>
                 <th>Crop Type</th>
                 <th>Quantity</th>
-                <th>Price per Kg</th>
+                <th>Total</th>
               </tr>
             </thead>
             <tbody>
@@ -59,7 +76,7 @@ function TransactionList() {
                   <td>{transaction.dealerEmail}</td>
                   <td>{transaction.quantity}</td>
                   <td>{transaction.cropType}</td>    
-                  <td>${transaction.pricePerKg}</td>
+                  <td>${transaction.totalPrice}</td>
                 </tr>
               ))}
             </tbody>

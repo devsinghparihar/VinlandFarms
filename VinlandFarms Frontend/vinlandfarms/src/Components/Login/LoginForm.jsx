@@ -18,9 +18,10 @@ function LoginForm() {
 
 
   const isPasswordValid = (password) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    // return passwordRegex.test(password);
-    return true;
+    const passwordRegex = /^.{6,}$/;
+    // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    return passwordRegex.test(password);
+    
   };
 
 
@@ -109,7 +110,7 @@ function LoginForm() {
               ref={email}
             />
             {!isEmailValid(emailCheck) && (
-              <span className="badge rounded-pill text-bg-danger">Email not valid</span>
+              <span className="badge rounded-pill text-bg-danger" id='eInvalid'>Email not valid</span>
             )}
 
 
